@@ -1,0 +1,129 @@
+Classes in javascript
+
+
+ES6 - မပေါ်ခင်တုန်းက JS မှာ ကျနော်တို့ class ClassName{} တွေကို သုံးလို့မရဘူး
+class တွေကို ရေးချင်ရင် Function constructor ကို သုံးပြီးရေးလို့ရတယ်
+
+
+With Function constructor
+
+function Animal(name, type, color){
+    this.name = name;
+    this.type = type;
+    this.color = color
+    this.canPlay = function(){
+        if(this.type === "dog"){
+            return true
+        }
+        return false
+    }
+}
+
+// Method ကို constructor function ထဲ ထပ်ထည့်လိုက်တာ
+Animal.prototype.getDetails = function(){
+    return `${this.type} => ${this.name} => ${this.color}`
+}
+
+var dog = new Animal("Lone Lone", "dog", "white")
+console.log(dog) // { name: 'Lone Lone', type: 'dog', color: 'white', canPlay: [λ] }
+console.log(dog.canPlay()) // true
+console.log(dog.getDetails()) //'dog => Lone Lone => white' 
+
+var fish = new Animal("Nemo", "fish", "red")
+console.log(fish) // { name: 'Nemo', type: 'fish', color: 'red', canPlay: [λ] }
+console.log(fish.canPlay()) // false
+console.log(fish.getDetails()) // 'fish => Nemo => red' 
+
+........................
+
+With Class
+
+class Animal{
+    constructor(name, type, color){
+        this.name = name;
+        this.type = type;
+        this.color = color
+    }
+    
+    canPlay(){
+        if(this.type === "dog"){
+            return true
+        }
+        return false
+    }
+}
+
+// Method ကို Class ထဲ ထပ်ထည့်လိုက်တာ
+Animal.prototype.getDetails = function(){
+    return `${this.type} => ${this.name} => ${this.color}`
+}
+
+var dog = new Animal("Lone Lone", "dog", "white")
+console.log(dog) // { name: 'Lone Lone', type: 'dog', color: 'white', canPlay: [λ] }
+console.log(dog.canPlay()) // true
+console.log(dog.getDetails()) //'dog => Lone Lone => white' 
+
+var fish = new Animal("Nemo", "fish", "red")
+console.log(fish) // { name: 'Nemo', type: 'fish', color: 'red', canPlay: [λ] }
+console.log(fish.canPlay()) // false
+console.log(fish.getDetails()) // 'fish => Nemo => red' 
+
+
+........................
+
+
+မှတ်ရမယ်ဆိုရင် 
+
+Function constructor တွေက hoisted ဖြစ်လို့
+declaration ကို ‌အပေါ် ခေါ်သုံးလို့ရတယ်
+
+var dog = new Animal("Lone Lone", "dog", "white")
+console.log(dog) // { name: 'Lone Lone', type: 'dog', color: 'white', canPlay: [λ] }
+
+function Animal(name, type, color){
+    this.name = name;
+    this.type = type;
+    this.color = color
+    this.canPlay = function(){
+        if(this.type === "dog"){
+            return true
+        }
+        return false
+    }
+}
+
+
+Class က  hoisted မဖြစ်လို့ သုံးလို့မရပါဘူး
+
+var dog = new Animal("Lone Lone", "dog", "white") 
+// Error: Cannot access 'Animal' before initialization 
+
+class Animal{
+    constructor(name, type, color){
+        this.name = name;
+        this.type = type;
+        this.color = color
+    }
+    
+    canPlay(){
+        if(this.type === "dog"){
+            return true
+        }
+        return false
+    }
+}
+
+........................
+
+နောက်တစ်ခုက Class က တခြား Class တစ်ခုကို extends keyword ထပ်သုံးလို့ရတယ်
+
+class DateFormatter extends Date {
+    getFormattedDate() {
+      return this.toLocaleString()
+      //toLocaleString ဆိုတဲ့ function က Date interface ထဲမှာရှိတယ်
+      //extends လုပ်ထားတဲ့ class ထဲက ယူသုံးတဲ့ သဘောပဲ
+    }
+  }
+
+let date = new DateFormatter()
+console.log(date.getFormattedDate()) //'12/14/2023, 11:06:07 AM'

@@ -1,0 +1,95 @@
+Generator functions in JS
+
+ES6 features ထဲမှာ ပါလာတာပါပဲ
+
+Example ပြောရမယ်ဆိုရင်
+
+JS မှာ loop တွေက continuous သဘောနဲ့ သွားတယ်
+ကျနော်တို့က တစ်နေရာမှာ ရပ်သွားတယ် ရပ်သွားတဲ့ နေရာ ကပြန် run ချင်တယ်ဆိုရင် ကိုယ့်ဘာသာ ရေးရမယ်
+မဟုတ်ရင်တော့ သူက loop အစကနေ ပြန်သွားမယ်
+
+ကျနော်တို့က ရပ်လိုက်တဲ့ နေတာကနေ ပြန်စပြီး အလုပ်လုပ်ချင်တာမျိုးဆိုရင် 
+Generator functions ကို သုံးလို့ရတယ်
+Generator functions ဆိုတာက အလုပ်လုပ်နေစဉ် ရပ်လိုက်လို့ရတယ်
+ရပ်လိုက်တဲ့ နေရာက ပြန်စလို့ရတယ်
+
+
+Generator function ရေးမယ်ဆိုရင် function* funName{
+} function keyword နောက်မှာ * ပါရမယ်
+
+Normal function မှာဆိုရင် တန်ဖိုးကို return ပြန်ချင်ရင် 
+"return" သုံးတယ်
+Generator function မှာဆိုရင် "yield" သုံးတယ်
+
+function* funName{
+
+}
+funName().next()
+funName() သည် Generator Object / အဲ့ Obj ထဲမှာ next() ဆိုတဲ့
+method ပါတယ်/ next() က အနီးဆုံး yield value ကို return ပြန်တယ်
+Return Value က obj ({ value: 'Something', done: false }) သူ့ထဲမှာ value နဲ့ done ဆိုပြီးပါတယ်
+value က ကျနော်တို့ လိုချင်တဲ့ တန်ဖို့း 
+done က function code က ပြီးသွားရင် true / မပြီးသေးရင် false
+
+
+Sample Code နဲ့တွဲကြည့်မယ်ဆိုရင် 
+
+function* genFunc() {
+    yield 3;
+    yield 4;
+}
+
+let genObj = genFunc()
+console.log(genObj.next()) // { value: 3, done: false }
+console.log(genObj.next()) // { value: 4, done: false }
+
+// နောက်တစ်ခါ ထပ်run တော့ yield မရှိတော့ဘူး အဲ့တော့ function သည် complete
+// done true
+console.log(genObj.next()) // { value: undefined, done: true }
+
+
+
+............................
+
+ပိုပြီးမြင်သာသွားအောင် fibonacci လေးနဲ့ စမ်းကြည့်မယ်
+
+next value ကို လိုချင်ရင် သူရှေ့မှာ ရှိတဲ့ နှစ်ခုကို ပေါင်းသွားတာ
+default က 0 နဲ့ 1 / 2 => 1 + 1  => 3 => 1 + 2
+0 1 1 2 3 5 8
+
+ရိုးရိုး Normal function
+
+function fibonacci(num) {
+    let num1 = 0;
+    let num2 = 1;
+    for(let i = 0; i < num; i++){
+        console.log(num2)
+        sum = num1 +  num2
+        num1 = num2
+        num2 = sum
+    }
+}
+fibonacci(5)
+//console.log မှာ 1, 1, 2, 3, 5
+
+..............
+
+Generator function
+
+function* fibonacci(num){
+    let num1 = 0;
+    let num2 = 1;
+    for(let i = 0; i <= num; i++){
+        yield num2;
+        [num1,num2] = [num2, num1+num2];
+    }
+}
+
+let fibo = fibonacci(5)
+console.log(fibo.next()) //{ value: 1, done: false }
+console.log(fibo.next()) //{ value: 1, done: false }
+console.log(fibo.next()) //{ value: 2, done: false }
+console.log(fibo.next()) //{ value: 3, done: false }
+console.log(fibo.next()) //{ value: 5, done: false }
+console.log(fibo.next()) //{ value: 8, done: false }
+console.log(fibo.next()) //{ value: undefined, done: true }

@@ -1,0 +1,95 @@
+Codewars
+
+Coding လေ့ကျင့်လို့ရတဲ့ website တွေထဲမှာ
+သဘောကျဆုံး site က "https://www.codewars.com" 
+
+သူက difficulty 1 - 8 (1 က အခက်ဆုံး 8 က အလွယ်ဆုံး)
+ပြီးတော့ သူ့အားသာချက်က ရေးပြီးသွားလို့ မှန်သွားရင် 
+Best Answers တွေကို ပြတယ်
+
+အဲ့တော့ ကိုယ်ရေးတဲ့ Code ထက်ကောင်းတာမျိုး ပိုရှင်းတာမျိုးကို
+လေ့လာလို့ရတယ်
+
+.....................
+
+အလွယ်ဆုံးထဲက တစ်ခုနဲ့ စမ်းကြည့်ရအောင် 
+
+8kyu
+
+Question: Merging sorted integer arrays (without duplicates)
+Write a function that merges two sorted arrays into a single one. 
+The arrays only contain integers. 
+Also, the final outcome must be sorted and not have any duplicate.
+
+Solution: function mergeArrays(a, b) {
+            // your code here
+          }   
+
+
+သူပြောတာက a,b နဲ့ array နှစ်ခုကို ပေါင်းပြီး တစ်ခုတည်း ဖြစ်အောင်လုပ်မယ်
+duplicate values မရှိရဘူး sorting စီပြီးသားဖြစ်ရမယ်
+
+
+Sample Tests ဆိုပြီးလည်း test case လေးတွေပါတယ်
+describe("mergeArrays", function(){
+  it("Example Tests", function(){
+    assert.deepEqual(mergeArrays([1, 3, 5], [2, 4, 6]), [1, 2, 3, 4, 5, 6]);
+
+    assert.deepEqual(mergeArrays([2, 4, 8], [2, 4, 6]), [2, 4, 6, 8]);
+    //4က နှစ်ခု 1ခုပဲပါမယ် ငယ်စဉ်ကြီးလိုက်စီပြီးသားဖြစ်ရမယ်
+  });
+});
+
+
+.....................
+
+array နှစ်ခုပေါင်းတာကို 
+
+    concat နဲ့လည်းပေါင်းလို့ရတယ် 
+    spread operator လည်းသုံးလို့ရတယ်
+    loop ပတ်ပြီးလည်း ထပ်ထည့်လို့ရတယ်
+
+unique ဖြစ်အောင်လို့
+
+    Set ဆိုတဲ့ build-in-objects သုံးလည်းရတယ်
+
+    array ထဲက first index နဲ့ last index မတူရင်လည်း 
+    duplicate ဖြစ်တယ်လို့မှတ်လို့ရတယ်
+
+    loop ပတ်ပြီးထည့်နေတဲ့ အချိန်မှာလည်း ရှိပြီးသားလား ဆိုတာလည်း
+    စစ်လို့ရတယ်
+
+sort အတွက်က
+    sort method သုံးလို့ရတယ်
+
+ဒါက ကျနော် ‌ရေးလိုက်တဲ့ Answer ပါပဲ
+
+function mergeArrays(a, b) {
+  return [...new Set(a.concat(b))].sort((a,b) => a-b)
+}
+
+
+ကျန်တာကတော့ သူများဖြေထားတာတွေပါပဲ
+
+function mergeArrays(a, b) {
+  const array = [...a, ...b].sort((a,b) => a-b)
+  const answer = array.filter((item, index) => array.indexOf(item) === index)
+  return answer
+}
+
+function mergeArrays(a, b) {
+  const merged = [...a, ...b]
+  merged.sort((a,b)=>a-b)
+  const res = []
+  
+  for(let i=0; i<merged.length; i++){
+    if(i===0 || merged[i] != merged[i-1]){
+      res.push(merged[i])
+    }
+  }
+  return res
+}
+
+တစ်ယောက်နဲ့ တစ်ယောက် ဖြေပုံချင်းကတော့ ကိုယ့်မှာရှိတဲ့ 
+knowledge ပေါ် မူတည်ပြီး ကွဲပြားသွားနိုင်ပါတယ်
+

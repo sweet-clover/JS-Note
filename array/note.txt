@@ -1,0 +1,175 @@
+Array in JS
+
+Array Method တွေကို example နဲ့ တွဲသုံးကြည့်ရအောင်
+မှတ်ထားရမှာက Array, Object တွေက Reference Values နဲ့သွားတယ်
+
+
+let arr = [1,2,3,4,5]
+console.log('arr', arr) //[ 1, 2, 3, 4, 5]
+//arr က array လိုက်သိမ်းတာမဟုတ်ဘဲ memory ပေါ်မှာ နေရာယူထားတဲ့ address ကိုပဲသိမ်းပေးထားတာ
+
+let arr2 = arr
+//နောက်ထပ် variable တစ်ခုထဲ assign လိုက်တယ်
+// arr နဲ့ arr2 က address တူတယ်
+
+arr2.push(6)
+// arr2 ထဲကို ထပ်ထည့်လိုက်တော့ သူနဲ့ address တူတဲ့ arr ပါပြောင်းသွားယ်
+console.log('arr', arr) // [ 1, 2, 3, 4, 5, 6 ]
+console.log('arr2', arr2) // [ 1, 2, 3, 4, 5, 6 ]
+
+
+//မူရင်း Array ကို တန်ဖိုး မပြောင်းစေချင်ရင် 
+let arr = [1,2,3,4,5]
+console.log('arr', arr) //[ 1, 2, 3, 4, 5]
+
+let arr2 = [...arr]
+arr2.push(6)
+// [...arr] arr array ထဲမှာ ရှိတာအကုန်ကို အသစ်တစ်ခုတည်းပြောင်းသိမ်းလိုက်တာ
+// အသစ်တစ်ခုဖြစ်သွားတော့ address မတူတော့ဘူး 
+
+console.log('arr', arr) // [ 1, 2, 3, 4, 5 ]
+console.log('arr2', arr2) // [ 1, 2, 3, 4, 5, 6 ]
+
+
+......................................
+
+map, filter, reduce, every, some
+
+eg. Obj
+let todo_list = [
+    { "task": "HTML", "done": true },
+    { "task": "CSS", "done": true },
+    { "task": "Responsive design", "done": true },
+    { "task": "Git", "done": true },
+    { "task": "JavaScript", "done": true },
+    { "task": "NodeJS", "done": false }
+]
+
+Map က array ကို loop ပတ်တဲ့ အခါမှာသုံးတယ်
+
+let mapList = todo_list.map((item) => {
+    return {
+        ...item,
+        date: new Date()
+    }
+})
+
+console.log(mapList)
+// { task: 'Git', done: true, date: 2023-12-18T08:48:56.767Z }
+// Every Obj ကို date property ထပ်ထည့်လိုက်လိုက်တာ
+
+....................
+
+Filter က search/filter လုပ်တဲ့ အခါသုံးတယ်
+Eg. List ထဲက ပြီးတာတွေကို ထုတ်ပေးပါ ဆိုတာမျိုး
+
+filter က boolean တန်ဖိုး return ပြန်တာ condition နဲ့ ညီတာနဲ့ မညီတာ
+
+let filterList = todo_list.filter((item) => {
+    return item.done
+})
+
+console.log(filterList)
+// done true ဖြစ်တာ အားလုံးပေါင်း 5 ခုရှိတယ်
+// done false ဖြစ်တာလိုချင်ရင်  
+
+filterList = todo_list.filter((item) => {
+    return !item.done
+})
+
+console.log(filterList)
+// 1 တစ်ခုပဲရှိတယ်
+
+
+.................... 
+
+Reduce က ကျတော့ သူ့အားသားချက်က May, Filter တို့လို့ Array Method 
+အကုန် Reduce ကို သုံးပြီး ရေးလို့ရတယ်
+
+reduce(callbackFn, initialValue)
+
+initialValue က စစချင်း တန်ဖို့း pass လုပ်ပေးလိုက်တာ
+callbackFn(accumulator, currentValue, index, array) 
+accumulator က  return ပြန်မယ့် value ကို အဲ့ထဲထည့်လိုက်တာ
+currentValue က currentElement 
+index က currentElement ရဲ့ index
+
+Eg. အနေနဲ့ list ထဲက done ဖြစ်တာနဲ့ မဖြစ်တာကို list ပြတာရေးကြည့်မယ်
+
+let reduceList = todo_list.reduce((acc, currentValue) => {
+    if(currentValue.done){
+        acc['finished'].push(currentValue.task) // true ဖြစ်တဲ့ condition 
+    }else{
+        acc['unfinished'].push(currentValue.task) // false ဖြစ်တဲ့ condition 
+    }
+    return acc
+}, {
+    "finished": [],
+    "unfinished": []
+}) 
+
+// {"finished": [], "unfinished": []} က initialValues
+console.log(reduceList)
+//{
+//   finished: [ 'HTML', 'CSS', 'Responsive design', 'Git', 'JavaScript' ],
+//   unfinished: [ 'NodeJS' ]
+// }
+
+အပေါ်မှာ ရေးထားတဲ့ map function ကို reduce နဲ့ရေးထားတာ
+
+let reduceLikeMap = todo_list.reduce((acc, current) => {
+    acc.push({
+        ...current,
+        date: new Date()
+    })
+    return acc
+},[])
+
+console.log(reduceLikeMap)
+
+အပေါ်မှာ ရေးထားတဲ့ filter function ကို reduce နဲ့ရေးထားတာ
+
+let reduceLikeFilter = todo_list.reduce((acc, current) => {
+    if(!current.done){
+        acc.push({
+            ...current,
+            date: new Date()
+        })
+    }
+    return acc
+},[])
+
+console.log(reduceLikeFilter)
+
+.................... 
+
+
+Every က အကုန် ကိုက်ညီလား မညီလားဆိုတာစစ်တာ
+
+eg. task အကုန် ပြီးပြီးလားဆိုတာမျိုး တစ်ခုကျန်တာနဲ့ false
+    အကုန်လုံးပြီးမှ true
+    
+    အခု sample dat‌a မှာဆိုရင် တစ်ခုကျန်လို့ false ဖြစ်မယ်
+
+
+let check = todo_list.every(item => item.done)
+console.log(check) //false
+// အကုန် true ဖြစ်မှ true
+
+check = todo_list.every(item => !item.done)
+console.log(check) //false
+// အကုန် false ဖြစ်မှ true
+
+.................... 
+
+Some 
+
+    some က တစ်ခုက condition နဲ့ကိုက်သွားတာနဲ့ true
+    အကုန်လုံး မကိုက်မှ false
+
+let some_check = todo_list.some(item => item.done)
+console.log(some_check) //true
+// အကုန် false ဖြစ်မှ false
+
+
+....................
