@@ -1,1 +1,146 @@
-Regular Expression 
+Regular expressions
+
+
+Regular expressions ကို ကိုယ်လိုချင်တဲ့ format နဲ့ လက်ရှိတန်ဖိုးကို တိုက်စစ်တဲ့
+နေရာမှာသုံးတယ်
+
+eg. password ဆို ဒီတိုင်းလက်မခံဘဲ  Uppercase , Lowercase, Numbers,
+Special Characters အနည်းဆုံး တစ်လုံးပါရမယ် 
+total count က အနည်းဆုံး 8 လုံးပါရမယ်ဆိုတဲ့ pattern လေးရေးထားပြီး
+user input value က pattern နဲ့ match ဖြစ်လား/မဖြစ်လား စစ်လို့ရတယ်
+
+
+new RegExp('^A[0-9]$', 'i') new RegExp သုံးပြီးရေးလို့ရသလို 
+/^A[0-9]$/i အဲ့လိုလည်းရေးလို့ရတယ်
+
+pattern တွေကို exec(), test() ဆို RegExp ရဲ့ methods နဲ့ တွဲသုံးလို့ရတယ်
+
+String Methods တွေဖြစ်တဲ့ match(), matchAll(), replace(), replaceAll(), 
+search(), and split() တို့နဲ့လည်းတွဲသုံးလို့ရတယ်
+
+...................
+
+i => case insensitive (အကြီး/အသေးနှစ်ခုလုံးလက်ခံတယ်)
+^ => အစ
+
+const globalRegex = new RegExp('^A'); //^A (အစသည် A ဖြစ်ရမယ်)
+globalRegex.test("ABC") // true ( A နဲ့စ )
+globalRegex.test("abc") // false (A နဲ့စလည်း case insensitive လက်မခံထားလို့)
+globalRegex.test("9bc") // false (A နဲ့ မစလို့ )
+
+const globalRegex = new RegExp('^A', 'i');
+globalRegex.test("abc") // true (case insensitive )
+
+...................
+
+$ => အဆုံး
+
+const globalRegex = new RegExp('^A[0-9]$', 'i');
+//A နဲ့စရမယ် [0-9]ထဲကတစ်ခုခုနဲ့ဆုံးရမယ်
+globalRegex.test("AB0"); // false (B ပိုသွားလို့)
+globalRegex.test("a9"); //true
+
+A-Z လက်ခံချင်တယ်ဆိုရင် [a-z]
+0-9 ဆိုရင် [0-9]
+\w => letter and digit
+\d => digit 
+
+...................
+
+{} => number of times / ဘယ်နှစ်လုံးပါရမယ်ဆိုပြီးသတ်မှတ်လို့ရတယ်
+
+\w{8} - 8 လုံးပါရမယ်
+letter နဲ့ digit  8 လုံးရှိရမယ်ဆိုရင်
+globalRegex = /^\w{8}$/i;
+globalRegex.test("abc12345") // true (8ခုဖြစ်လို့)
+globalRegex.test("abc123") // false (8 ထက်နည်းလို့)
+globalRegex.test("abc123456") // false (8 ထက်များလို့)
+
+\w{8,} - 8 လုံးပါရမယ် အဲ့ထက်များလို့ရတယ် , ပါရင်
+\w{8,16} - 8 လုံးပါရမယ် 16 လုံးထိ
+
+
+globalRegex = /^\w{8,}$/i;
+globalRegex.test("abc123456") // true ဖြစ်သွားမယ်
+
+...................
+
+() grouping လုပ်ပေးတာ
+/ . စတာတွေရေးရင်ရင်  \ ခံပေးရတယ်
+
+eg. website name နောက်မှာရှိတဲ့ com, org လား စစ်လို့ရတယ်
+
+globalRegex = /^\w{8,}\.(com|org)$/i;
+globalRegex.test("abc123456.com") // true
+globalRegex.test("abc123456.org") // true
+globalRegex.test("abc123456.dev") // false (com နဲ့ org ပဲလက်ခံထားတာ)
+
+...................
+
+.  => any ဘာလာလာ
+globalRegex = /.sion$/;
+ရှေ့မှာ ဘာလာလာ sion နဲ့ ဆုံးရင်ရပြီ
+globalRegex.test('version') // true
+
++ => one or more
+အနည်းဆုံးတစ်လုံးပါရမယ် 
+
+globalRegex = /A\d+/;
+globalRegex.test('A8'); //true
+globalRegex.test('A'); // false
+
+
+* => zero or more
+မပါလည်းရတယ်
+
+globalRegex = /A\d*/;
+globalRegex.test('A8') //true
+globalRegex.test('A') // true
+
+
+? => zero or one (optional) it can appear either once or not at all
+
+globalRegex = /June?/i 
+// e? (? က optional ပါလည်းရတယ် မပါလည်းရတယ် )
+globalRegex.test("Jun"); //true
+globalRegex.test("June"); //true
+
+...................
+
+\b =>  word boundary
+let checkString = "Last year 2022, I had 500$. In the year 2023, I had 1000$"
+
+X(?=Y), X နောက်မှာ Y တွဲနေတာကိုရှာတာမျိုး
+
+checkString.match(/\d+(?=\$)/gi) // [500,100]
+// ?=\$ ‌amount ကိုပဲလိုချင်လို့ $နဲ့ဆုံးတာကိုထုတ်ပေးတာ
+
+
+X(?!Y), X နောက်မှာ Y မရှိတာမျိုး
+
+checkString.match(/\d+\b(?!\$)/gi) // [ '2022', '2023' ]
+// ?!\$ year ကိုပဲလိုချင်လို့ $နဲ့မဆုံးတာကိုထုတ်ထားတာ
+
+...................
+
+
+string ကို match လုပ်တဲ့ အခါမှာလည်း အသုံးများတယ်
+
+let todo_list = [
+    { "task": "HTML", "done": true },
+    { "task": "CSS", "done": true },
+    { "task": "Responsive design", "done": true },
+    { "task": "Git", "done": true },
+    { "task": "JS", "done": true },
+    { "task": "NodeJS", "done": false },
+]
+
+let list = todo_list.filter((item) => /JS$/gi.test(item.task))
+// item 2 ခုရမယ် task name JS နဲ့ဆုံးတာ နှစ်ခုရှိတယ်
+
+...................
+
+ဒီလောက်ဆိုရင် သူများရေးထားတဲ့ Regular Expression တွေကို ဖတ်တတ်မယ်လို့
+ထင်တာပါပဲ :)
+
+
