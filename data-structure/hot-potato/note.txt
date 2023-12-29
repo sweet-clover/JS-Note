@@ -96,3 +96,12 @@ console.log(hotPotato(names, 7)) //A
 
 
 **************************
+
+
+Stack နဲ့ Queue ကို နားလည်ပြီထင်ပါတယ်
+ကိုယ့်ဘာသာစမ်းပြီး 
+Bank မှာ စောင့်ရတဲ့ Token ထုတ်တာတို့ 
+VIP ဆိုရင် Priority Queue သုံးပြီးစမ်းကြည့်တာဆို့
+Undo/Redo တို့ကို စမ်းရေးကြည့်လို့ရပါတယ်
+
+Ref: Learning-JavaScript-Data-Structures-and-Algorithms-Second-Edition.pdf

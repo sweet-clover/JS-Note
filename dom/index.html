@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 id="title">Heading 1</h1>
+    <button id="btn">Change Title</button>
+    <script>
+        let element = document.getElementById("title")
+        let btn = document.getElementById("btn")
+        btn.onclick = function(){
+            element.textContent = "Change Heading 2"
+        }
+    </script>
+</body>
+</html>

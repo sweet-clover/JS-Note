@@ -1,0 +1,125 @@
+DOM ( Document Object Model )
+
+ကျနော်တို့က html file တစ်ခု ရေးတယ် browser မှာဖွင့်လိုက်တယ်
+heading ကို ရေးလိုက်တယ် <h1>Title</h1> 
+browser  မှာ ကြည့်လိုက်ရင်လေ <h1>Title</h1> အဲ့လိုပြန်မပေါ်ဘူး
+Title ကို စာလုံး အကြီးနဲ့ပေါ်တာ 
+
+Browser က HTML file မှာရှိတဲ့ content ကိုယူတယ်
+ပြီးရင် HTML Parser ကိုသုံးပြီး DOM tree ဆောက်လိုက်တာ
+
+eg. DOM Tree
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>Title</h1>
+    </body>
+</html>
+ 
+
+html ထဲမှာ head နဲ့ body ဆိုပြီး two children ရှိတယ်
+head ထဲမှာ meta နဲ့ title ဆိုပြီး two children ထပ်ရှိတယ်
+body ထဲမှာ h1 ဆိုတဲ့ child ရှိတယ်
+
+အောက်က ဒုတိတယမြောက် ပုံလေးကိုကြည့်လိုက်ရင် ပိုရှင်းသွားမယ်
+
+အဲ့တာနဲ့ JS နဲ့ဘာဆိုင်လို့လဲဆိုတော့ 
+JS ကို သုံးပြီး အဲ့ html tag တွေကို တိုက်ရိုက် access လုပ်လို့ရတယ်
+
+
+****************
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 id="title">Heading 1</h1>
+    <script>
+        let element = document.getElementById("title")
+        console.log(element.textContent) // Heading 1
+    </script>
+</body>
+</html>
+
+document.getElementById ဆိုတဲ့ method ကိုသုံးပြီး
+html tag ကို လှမ်းဖမ်းတယ်
+အဲ့tag ထဲက textContent ကို ပြန်ထုတ်ကြည့်တယ်
+
+****************
+
+Button ကို Click နှိပ်ပြီး title ထဲက စာသားကို ပြောင်းကြည့်မယ်
+
+
+<body>
+    <h1 id="title">Heading 1</h1>
+    <button id="btn">Change Title</button>
+    <script>
+        let element = document.getElementById("title")
+        let btn = document.getElementById("btn")
+        btn.onclick = function(){
+            element.textContent = "Change Heading 2"
+        }
+    </script>
+</body>
+
+ let element = document.getElementById("title")
+ let btn = document.getElementById("btn") နဲ့ tag ကိုဖမ်းထားတယ်
+ btn ကို click နှိပ်တာနဲ့ onclick က အလုပ်လုပ်သွားမယ်
+ element ထဲက content ကို Change Heading 2 ပြောင်းလိုက်တယ်
+
+button ကို click နှိပ်လိုက်တာနဲ့ h1 ထဲက content က ပြောင်းသွားပြီ
+
+****************
+
+ကျနော်တို့က Application တစ်ခုရေးမယ်ဆိုရင် အမြဲအသေ
+ဖြစ်နေမှာ မဟုတ်ဘူး
+user interaction ပေါ်မူတည်ပြီး ပြောင်းလဲနေတာလေးတွေရှိတယ်
+အဲ့တာတွေကို JS နဲ့ control လုပ်လို့ရတယ်
+Frontend ပိုင်းရေးတဲ့သူပဲဖြစ်ဖြစ် / Fullstack ပဲဖြစ်ဖြစ်
+JS ကို လေ့လာရပါတယ်
+
+Eg. 
+Element.getElementsByTagName() 
+// h1,p စတဲ့ html tag တွေကို select လုပ်လိုက်တာ
+
+document.getElementById() 
+// id ကို select လုပ်တာ id က unique 
+// Element မှာ s မပါဘူး
+
+getElementsByClassName()
+// class ကို select လုပ်တာ 
+// class က multiple ဖြစ်တိုင်တယ်
+
+တခြား method တွေလည်း အများကြီးရှိတယ်
+
+နောက်ပိုင်း 
+အဲ့လိုတိုက်ရိုက်ရေးတာထက်လွယ်တဲ့ jQuery 
+ဆိုတာ အသုံးများလာကြတယ်
+
+eg. $( "button.continue" ).html( "Next Step..." )
+button element မှာ continue ဆိုတဲ့ class ပါတဲ့ 
+html tag က content ကို Next Step... ပြောင်းတာပဲ
+ရေးရတာရှင်းသွားတယ်
+Before: <button class="continue">Something</button>
+After: <button class="continue">Next Step...</button>
+
+အခုအချိန်မှာတော့ React (Library), Next (React Framework),
+Angular (JS Framework), Vue (JS Framework )တို့ကို
+အသုံးများလာကြတယ်
+
+DOM , jQuery တွေနားလည်ဖို့လိုလားမေးရင် လိုပါတယ်
+သူတို့ကို သုံးပြီးရေးထားတာတွေ ရှိနေရင်တော့ maintenance
+ရှိနေမှာပါပဲ
+
+ဒီလောက်ဆို JS ကို Frontend မှာဘာလို့သုံးလဲ မြင်ပြီ
+ထင်ပါတယ် :P 
