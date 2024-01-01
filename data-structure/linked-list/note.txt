@@ -1,0 +1,131 @@
+Data Structures in JavaScript -  Part 6 ( Linked List - append )
+
+Linked List က array လို eg. [1,2,3,4] အဲ့လိုမသွားဘူး
+
+သူက ဘာနဲ့ တူလဲဆိုရင် မီးရထားနဲ့ဆင်တယ်
+တစ်တွဲနဲ့ တစ်တွဲကို ချိတ်ထားတယ်ပေါ့
+
+တစ်ခါတစ်လေကျရင် ဘူတာတွေမှာ ရထားတွဲတွေပဲရှိတယ်
+ရထားခေါင်းမရှိဘူး ခနနေကျရင် ရထားခေါင်းက ရောက်လာပြီး
+ပထဆုံးတစ်ခုကို ချိတ်ပြီးဆွဲသွားလိုက်တော့ ကျန်တဲ့ အတွဲတွေ 
+အကုန်လုံးက အဆင့်ဆင့်ချိတ်ထားတော့ အကုန်ပါသွားကော
+
+eg. 
+
+A - B - C - D 
+
+ရှိမယ်ဆိုရင် A က B နဲ့ချိတ်မယ်
+B က C နဲ့ချိတ်တယ်
+C က D နဲ့ချိတ်တယ်
+D က နောက်မှာ ချိတ်ထားတာမရှိဘူး
+
+အဲ့တော့ ကျနော်တို့က C အတွဲကို ချန်ခဲ့မယ်ဆိုရင်
+C နဲ့ ချိတ်ထားတဲ့ D ပါ ကျန်ခဲ့မှာပါ
+A - B ပဲကျန်မယ် 
+
+
+eg.
+A ထဲမှာ 1 , B ထဲမှာ 2, C ထဲမှာ 3, D ထဲမှာ 4 ရှိတယ်လို့မှတ်ထားမယ်
+
+
+A က Node တစ်ခုဖြစ်မယ် သူ့မှာ value နဲ့ next ဆိုပြီးရှိမယ်
+value က 1 ဖြစ်ပြီး
+next ထဲမှာ B ရှိမယ်
+
+B ထဲမှာလည်း value နဲ့ next ဆိုပြီးရှိမယ်
+value က 2 
+next က C
+
+C ထဲမှာလည်း value နဲ့ next ဆိုပြီးရှိမယ်
+value က 3 
+next က D
+
+D ထဲမှာလည်း value နဲ့ next ဆိုပြီးရှိမယ်
+value က 4 
+next က null ဖြစ်သွားမယ်
+
+အဲ့တာကို Code ရေးကြည့်ရအောင်
+
+Node အတွက်က
+
+class Node{
+    constructor(value){
+        this.value = value
+        this.next = null
+    }
+}
+
+List အတွက်က သူ့မှာက head ရှိမယ် size မှတ်ထားမယ်
+
+class LinkedList{
+    constructor(){
+        this.head = null
+        this.size = 0
+    }
+}
+
+ပြီးရင် prepend ရှေ့ဆုံးကနေ ထပ်ထည့်တဲ့ method
+append နောက်ဆုံးကနေထပ်ထည့်တဲ့ method
+လေးစမ်း‌ရေးကြည့်ကြမယ်
+
+
+prepend (ရှေ့ဆုံးကနေ ထပ်ထည့်တာ)
+value ကို ရှေ့ဆုံးကို ထည့်ရမှာ
+
+ရှေ့ဆုံးက ထည့်မှာမိုလို့ D အရင်ထည့်မယ်
+C ထပ်ထည့်ရင် C က ရှေ့ဆုံးရောက်မယ် next က D
+B ထပ်ထည့်ရင် B က ရှေ့ဆုံးရောက်မယ် next က C
+A ထပ်ထည့်ရင် A က ရှေ့ဆုံးရောက်မယ် next က B
+
+Flow ကို မြင်တယ်ဆိုရင်
+အသစ်ထပ်ထည့်မယ့် node
+const node = new Node(value) 
+
+အသစ်ထပ်ထည့်တဲ့ node မှာ ရှိတဲ့ next က head ထဲက
+လက်ရှိဟာ
+node.next = this.head
+
+ပြီးရင် node ကို Head ထဲပြန်ထည့်တာ
+this.head = node
+
+*******************
+
+class Node{
+    constructor(value){
+        this.value = value
+        this.next = null
+    }
+}
+
+class LinkedList{
+    constructor(){
+        this.head = null
+        this.size = 0
+    }
+
+    prepend(value){
+        const node = new Node(value)
+        node.next = this.head
+        this.head = node
+    }
+}
+
+let list = new LinkedList()
+list.prepend("D")
+list.prepend("C")
+list.prepend("B")
+list.prepend("A")
+
+Node 
+{
+    value: 'A',
+    next: Node { 
+        value: 'B', 
+        next: Node { 
+            value: 'C', 
+            next: {value: 'D', next: null} 
+        } 
+    }
+}
+
+*******************

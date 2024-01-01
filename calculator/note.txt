@@ -1,0 +1,107 @@
+JavaScript (Simple Calculator)
+
+Calculator ရိုးရိုးလေးရေးကြည့်မယ်
+number နှစ်ခုကို ပေါင်း/နှုတ်/မြှောက်/စား ရေးကြည့်ကြမယ်
+
+input နှစ်ခုရှိမယ် number နှစ်ခုကိုလက်ခံမှာ
+select ရှိမယ် operator ရွေးရမှာ +,-,*,/
+result ပြမယ့်နေရာ input နောက်တစ်ခုရှိတယ်
+calculate လုပ်မယ့် button တစ်ခုရှိမယ်
+(button ကို click နှိပ်လိုက်တာနဲ့ input1 , input2 ထဲက
+values တွေကိုယူမယ် operator က + ဆိုရင် input value နှစ်ခုပေါင်းပြီး
+result ထဲမှာပြမယ်)
+
+CSS မထည့်ထားဘူး ရုပ်ဆိုးခိုင်းထားလိုက်မယ်
+
+*******************
+
+<input type="number" id="num1" name="num1" placeholder="Enter First Number"/>
+<select name="op" id="op">
+    <option value="+">+</option>
+    <option value="-">-</option>
+    <option value="*">*</option>
+    <option value="/">/</option>
+</select>
+<input type="number" id="num2" name="num2" placeholder="Enter Second Number"/>
+<button id="get">Get</button>
+<input type="number" id="result" name="result" readonly placeholder="Result"/>
+
+****************
+
+JS မှာဆိုရင်
+num1 values ကိုယူမယ်
+num2 values ကိုယူမယ်
+operator values ကိုယူမယ်
+document.getElementById("num1")
+input ထဲက values ကို လိုချင်ရင် .value ဆိုပြီးခေါ်ရင် ရတယ်
+
+const num1 = document.getElementById("num1").value
+const num2 = document.getElementById("num2").value
+const op = document.getElementById("op").value
+
+ဘယ်အချိန်မှာ calculation လုပ်မှာလဲဆိုရင်
+const btn = document.getElementById("get")
+btn.onclick ကိုသုံးမယ်
+
+အဲ့တော့ စရေးမယ်ဆိုရင် 
+get button ကို click မယ်
+click လုပ်လိုက်တဲ့ အချိန် inputs တွေကို ဖမ်းမယ်
+calculation လုပ်မယ် ( အဲ့မှာ condition စစ်လို့ရတယ် 
+    operator က + လား - လားဆိုတာ )
+result ထဲပြန်ပြမယ်
+
+အဲ့မှာ issue ရှိတယ် getElementById က string လာမှာ
+JS မှာ + operator က အလုပ်နှစ်ခုလုပ်တယ်
+string concatenation နဲ့ arithmetic operation
+10 + 10 ဆိုရင် နှစ်ခုလုံးက string ဖြစ်နေလို့ 1010 ဖြစ်သွားမယ်
+Number ပြန်ပြောင်းပေးရမယ်
+
+Number ပြောင်းတာက Number, parseInt, parseFloat, 
++(your variable), (your variable) * 1 ကြိုက်တာနဲ့ပြောင်း
+
+****************
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+
+<body>
+    <input type="number" id="num1" name="num1" placeholder="Enter First Number" />
+    <select name="op" id="op">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+    <input type="number" id="num2" name="num2" placeholder="Enter Second Number" />
+    <button id="get">Get</button>
+    <input type="number" id="result" name="result" readonly placeholder="Result" />
+    <script>
+        const btn = document.getElementById("get")
+        btn.onclick = function () {
+            const num1 = Number(document.getElementById("num1").value)
+            const num2 = Number(document.getElementById("num2").value)
+            const op = document.getElementById("op").value
+            let result;
+            if(op === "+"){
+                result = num1 + num2
+            }else if(op === "-"){
+                result = num1 - num2
+            }else if(op === "*"){
+                result = num1 * num2
+            }else if(op === "/"){
+                result = num1 / num2
+            }else{
+                result = "Invalid"
+            }
+            document.getElementById("result").value = result
+        }
+    </script>
+</body>
+
+</html>
