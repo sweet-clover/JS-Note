@@ -1,4 +1,4 @@
-Data Structures in JavaScript -  Part 6 ( Linked List - append )
+Data Structures in JavaScript -  Part 6 ( Linked List - prepend )
 
 Linked List က array လို eg. [1,2,3,4] အဲ့လိုမသွားဘူး
 
@@ -81,8 +81,9 @@ Flow ကို မြင်တယ်ဆိုရင်
 အသစ်ထပ်ထည့်မယ့် node
 const node = new Node(value) 
 
-အသစ်ထပ်ထည့်တဲ့ node မှာ ရှိတဲ့ next က head ထဲက
-လက်ရှိဟာ
+head ထဲမှာ တစ်ခုမှ မရှိခဲ့ရင် head ထဲကို node ကို ထည့်မယ်
+head ထဲမှာ ရှိခဲ့ရင် အဲ့ဒီ head က အသစ်ထပ်ထည့်တဲ့ 
+node ထဲက next ထဲ ဝင်ရမယ် အဲ့တာမှချိတ်မိမှာ
 node.next = this.head
 
 ပြီးရင် node ကို Head ထဲပြန်ထည့်တာ
@@ -103,10 +104,19 @@ class LinkedList{
         this.size = 0
     }
 
+    is_empty(){
+        return this.size === 0
+    }
+
     prepend(value){
         const node = new Node(value)
-        node.next = this.head
-        this.head = node
+        if(this.is_empty()){
+            this.head = node
+        }else{
+            node.next = this.head
+            this.head = node
+        }
+        this.size++
     }
 }
 
