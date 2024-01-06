@@ -102,6 +102,7 @@ prepend(value){
         this.head = node
     }
     this.size++
+    return value
 }
 
 Node 
@@ -305,6 +306,85 @@ print(){
 
 ******************
 
+/*---------- remove_at ----------*/
+
+position ကိုပေးလိုက်မယ် index === position တူတာကို 
+ရှာပြီး remove လုပ်လိုက်မယ်
+
+A, B, C, D 
+
+position က 2 ဆိုရင် element C
+အဲ့က C ကို ဖျက်လိုက်မယ်ဆိုရင် သတိထားရမှာက
+C မှာ က next ရှိတယ် အဲ့တာကို B နဲ့ပြန်ချိတ်ပေးရမယ်
+A, B, D ဖြစ်သွားမယ်
+
+remove လုပ်ပြီးရင် size ကို လျော့ရမယ်
+
+remove_at(position) {
+    if(position < 0 || position >= this.size) {
+        return false
+    }
+    let current = this.head
+    if (position === 0) {
+        this.head = current.next
+    } else {
+        let prev;
+        let i = 0
+        while (i < position) {
+            prev = current
+            current = current.next
+            i++
+        }
+        prev.next = current.next
+        this.size--
+    }
+}
 
 
+/*---------- remove ----------*/
 
+element pass လိုက်မယ် head ထဲမှာ value တူတာကို ရှာပြီ;
+remove လုပ်လိုက်မယ်
+
+******************
+
+remove(element) {
+    let current = this.head
+    let prev;
+    while (current) {
+        if (current.value === element) {
+            break;
+        }
+        prev = current
+        current = current.next
+    }
+
+    if(current == null){
+        return false
+    }else{
+        prev.next = current.next
+        this.size--
+    }
+}
+
+******************
+
+
+အဲ့လို ရေးလို့ရမယ်
+ကျနော်တို့က remove(index) နဲ့ဖျက်တာလည်း ရေးပြီးသာ
+index_of(element) index နဲ့ element ရှာတာလည်း
+ရေးပြီးသား အဲ့တာဆိုရင်
+index_of(element)
+remove(index) အဲ့နှစ်ခု သုံးလိုက်ရင်လည်းအဆင်ပြေပြီ
+
+******************
+
+remove(element) {
+    let index = this.index_of(element)
+    this.remove_at(index)
+}
+
+******************
+
+အဲ့ method တွေပါ value တွေပါတွေလိုချင်ရင်
+return ပြန်လိုက်နော်

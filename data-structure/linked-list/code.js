@@ -41,7 +41,7 @@ class LinkedList {
     }
 
     insert(position, value) {
-        if (position < 0 || position > this.size) {
+        if (position < 0 || position >= this.size) {
             return false
         }
 
@@ -63,11 +63,11 @@ class LinkedList {
         }
     }
 
-    index_of(element){
+    index_of(element) {
         let current = this.head
         let i = 0
-        while(current){
-            if(current.value === element){
+        while (current) {
+            if (current.value === element) {
                 return i
             }
             i++
@@ -76,11 +76,36 @@ class LinkedList {
         return -1
     }
 
-    print(){
+    remove_at(position) {
+        if(position < 0 || position >= this.size) {
+            return false
+        }
+        let current = this.head
+        if (position === 0) {
+            this.head = current.next
+        } else {
+            let prev;
+            let i = 0
+            while (i < position) {
+                prev = current
+                current = current.next
+                i++
+            }
+            prev.next = current.next
+            this.size--
+        }
+    }
+
+    remove(element) {
+        let index = this.index_of(element)
+        this.remove_at(index)
+    }
+
+    print() {
         let current = this.head
         let str = ''
-        while(current){
-            str += current.value + ' ' 
+        while (current) {
+            str += current.value + ' '
             current = current.next
         }
         return str
@@ -94,8 +119,7 @@ let list = new LinkedList()
 // list.prepend("A")
 list.append("A")
 list.append("B")
-list.append("E")
-console.log(list.insert(2, "C"))
-console.log(list.head)
-console.log(list.index_of('D'))
+list.append("C")
+list.append("D")
+list.remove("D")
 console.log(list.print())

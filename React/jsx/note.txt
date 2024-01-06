@@ -1,0 +1,130 @@
+React JSX
+
+အရင်က ကျနော်တို့ Simple Calculator ရေးခဲ့တယ်
+html file ထဲမှာ js သွင်းမယ်ဆိုရင် <script></script>
+ထဲမှာ ရေးရတယ်
+
+React မှာဆိုရင် JSX (JavaScript XML) ဆိုတာပါလာတယ်
+သူက JavaScript File ထဲမှာ HTML ကို ရောရေးလို့ရအောင်
+ပေါင်းပေးထားတာ
+
+The Rules of JSX 
+1. Return a single root element 
+return ပြန်တဲ့ဟာက root တစ်ခုထဲဖြစ်ရမယ်
+
+ဒီလိုရေးမရဘူး 
+return (
+    <div>JSX</div>
+    <div>JSX - 2</div>
+)
+
+ဒါကမှန်တယ် single node တစ်ခုတည်းကို return ပြန်ရမယ်
+return (
+    <div>
+        <div>JSX</div>
+        <div>JSX - 2</div>
+    </div>
+)
+
+div က block element မိုလို့ design မှာ အဆင်ပြေမှာဆိုးရင်
+<Fragment> ဆိုတာရှိတယ် သူက inline element 
+<Fragment>
+    <div>JSX</div>
+    <div>JSX - 2</div>
+</Fragment>
+အဲ့လိုရေးလို့သလို 
+
+<>
+    <div>JSX</div>
+    <div>JSX - 2</div>
+</>
+<></> ဒီလိုလည်းရေးလို့ရတယ်
+
+2. Close all the tags
+
+tags အကုန်က အပိတ်ပါရမယ်
+
+HTML မှာ line break က <br /> or <br>,
+image <img> or <img />
+ဘယ်လိုရေးရေးရတယ်
+
+JSX မှာက <br />, <img /> အပိတ်ပါရမယ်
+
+3. camelCase all most of the things!
+
+Camel - ကုလားအုတ် 
+သူ့ကျောကုန်းမှာလေ ဘို့လေးတွေရှိတယ်
+နိမ်းသွားလိုက်မြင့်သွားလိုက်
+
+JSX မှာဆိုရင် camelCase ကိုသုံးတယ်
+
+html မှာ onclick 
+JSX မှာဆိုရင် onClick 
+
+html မှာ ဆိုရင် onmouseover
+JSX မှာဆိုရင် onMouseOver
+
+camelCase နဲ့ variable declaration ရေးကြည့်မယ်
+let showData = false
+let accountInfo = {}
+let productName = "testing"
+
+camelCase ကို နားလည်ပြီဆိုရင် snake_case 
+ကို ဆက်ကြည့်မယ်
+သူက မြွေလို အရှည်လိုက်လေး
+သူက word တစ်ခုနဲ့ တစ်ခုကို underscore နဲ့ဆက်သွားတာ
+
+snake_case နဲ့ variable declaration ရေးကြည့်မယ်
+
+let show_data = false
+let account_info = {}
+let product_name = "testing"
+
+Pascal case ဆိုတာရှိသေးတယ် သူက camelCase နဲ့ဆင်တယ်
+အစက အကြီးပြောင်းသွားတာ 
+
+let ShowData = false
+let AccountInfo = {}
+let ProductName = "testing"
+
+....................................................
+
+အဲ့တာဆိုရင် JSX ကို‌ ရေးတတ်ပြီလို ထင်ပါတယ်
+
+JavaScript မှာ class ရှိတယ်
+html မှာ လဲ class ရှိတယ်
+keyword က တူနေတယ်
+
+JSX မှာဆိုရင် html မှာပါတဲ့ class ကို className ဆိုပြီးပြောင်း
+ရေးပါတယ်
+
+ကျောင်းသားတစ်ယောက်ရဲ့ information ပြတာကို JSX နဲ့ ရေးကြည့်မယ်
+
+react project / src folder / App.js မှာ 
+
+***************
+
+function App() {
+  return (
+    <div>
+      <h1>Sweet Clover</h1>
+      <img src="" alt="Profile Image" />
+      <h3>Role ID</h3>
+      <h3>Major</h3>
+      <h3>Phone Number</h3>
+      <p>Address</p>
+    </div>
+  );
+}
+
+export default App;
+
+***************
+
+ပြင်‌ရေးပြီး ပြန် run ကြည့်မယ်
+
+run မယ်ဆိုရင် Project ထဲက package.json ->
+scripts ကို သွားကြည့်နော်
+yarn run [script] or npm run [script]
+start ဆိုရင်တော့ npm start or yarn start
+ဆိုပြီး run လို့ရတယ် 

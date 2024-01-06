@@ -1,0 +1,59 @@
+React (Installation)
+
+Latest documentation
+https://react.dev/learn/start-a-new-react-project
+
+အရင်ဆုံး NodeJS သွင်းရပါတယ်
+Node Version က >= 14.0.0 က စသွင်းပါ
+အဲ့ထက်ငယ်ရင်အဆင်မပြေပါဘူး
+https://nodejs.org/en/
+
+
+ကိုယ်ကသွင်းထားပြီးလား စစ်ချင်ရင် Terminal/Command Prompt
+ဖွင့်ပြီး node -v ကို ရိုက်ကြည်ပါ
+node version ကျလာရင် ရှိပြီးသားပါပဲ
+
+React က Library 
+Library ဆိုတာက သူ့တစ်ခုတည်းလိုမျိုးပဲ 
+eg.Moment.js သူက Library ပါပဲ
+သူက date နဲ့ပတ်သတ်တာ အကုန် control လုပ်လို့ရတယ်
+
+React မှာ router မပါပါဘူး react-router-dom ကိုထပ်ထည့်ပြီးသုံးကြတယ်
+React ကလည်း သူနဲ့ဆိုင်တာကို စုပေးထားတဲ့ Library တစ်ခုပါပဲ
+
+အခုနောက်ပိုင်း Next.js ပေါ်လာတယ် သူက Framework 
+Framework ဆိုတာက Application တစ်ခုတည်ဆောက်ဖို့  
+လုံလောက်တဲ့ဟာအကုန် စုထားပေးတာ Routing လည်းပါပြီးသား
+စရေးရုံပါပဲ
+
+အခု react documentation မှာဆိုရင် next ကို support ပေးထားလို့
+next ကို ဆက်လေ့လာသင့်ပါတယ်
+npx create-next-app@latest က next-app ကို သွင်းသွားမှာပါ
+
+ကျနော်တို့က react ကိုပဲ အရင်လေ့လာကြမယ်
+
+https://legacy.reactjs.org/docs/create-a-new-react-app.html
+ဒါကတော့ documentation အဟောင်းပါ
+အဲ့က အရင်လေ့လာကြပါမယ်
+
+ကျနော်က VS Code သုံးတော့ folder တစ်ခုဆောက်ပြီး 
+အဲ့ folder ကို VS Code မှာ ဖွင့်လိုက်တယ်
+VS Code က Terminal ကို သုံးလည်းရပါတယ်
+
+Command Prompt or Terminal သုံးလည်းရတယ်
+
+ပထမဆုံး npx create-react-app my-app အဲ့တာရိုက်ထည့်ပါ
+my-app က folder name ပါ ကိုယ်လိုချင်တဲ့ name သွင်းလို့ရပါတယ်
+
+npx not found ဆိုပြီး error တက်ရင် npm i -g npx
+ဆိုပြီးထပ်သွင်းပါ -g က global ပါ ဘယ်ကမဆို ခေါ်သုံးလို့ရပါမယ်
+permission လိုရင် sudo npm i -g npx
+
+
+ပြီးရင် cd my-app (cd က change directoryပါ my-app ဆိုတဲ့ 
+folder ထဲကို ဝင်လိုက်တာပါ)
+
+npm start ဆိုပြီးရိုက်ထည့်ပါ အဲ့တာဆို Browser မှာ react project
+လေး run နေတာ တက်လာပါမယ် 
+
+ပုံလေးအတိုင်းပေါ်လာတယ်ဆိုရင် React ကို စရေးလို့ရပါပြီ

@@ -1,0 +1,216 @@
+React ( Components )
+
+Component ဆိုတာက အပိုင်းကလေးတွေ 
+
+JSX မှာရေးခဲ့ code ကို sample ပြန်ကြည့်ကြမယ်
+
+function App() {
+  return (
+    <div>
+      <h1>Sweet Clover</h1>
+      <img src="" alt="Profile" />
+      <h3>Role ID</h3>
+      <h3>Major</h3>
+      <h3>Phone Number</h3>
+      <p>Address</p>
+    </div>
+  );
+}
+
+ဒါလေးက ကျောင်းသား တစ်ယောက်အတွက် 
+loop ခန မေ့ထားမယ် :P
+
+နောက်တစ်ယောက် အတွက်ထပ်လိုချင်တယ်လိုရင်
+copy ကူးမယ် ထပ်ထည့်မယ် name ပြောင်းမယ်
+
+function App() {
+  return (
+    <>
+    <div>
+      <h1>Sweet Clover</h1>
+      <img src="" alt="Profile" />
+      <h3>Role ID</h3>
+      <h3>Major</h3>
+      <h3>Phone Number</h3>
+      <p>Address</p>
+    </div>
+    <div>
+      <h1>Sweet Clover</h1>
+      <img src="" alt="Profile" />
+      <h3>Role ID</h3>
+      <h3>Major</h3>
+      <h3>Phone Number</h3>
+      <p>Address</p>
+    </div>
+    </>
+  );
+}
+
+Code အရဆို Duplicate ဖြစ်သွားပြီ
+ကျနော်တို့က  ရေးပြီးသားcode တွေဆိုရင်
+ပြန်မထပ်အောင် လုပ်သင့်တယ်
+မဟုတ်ရင် maintenance လုပ်ရတာ မလွယ်ဘူး
+
+React ရဲ့ အားသာချက်က element တွေစုပြီးရင် Component ခွဲထုတ်
+ပြီး လိုအပ်သလို ပြန် reuse လုပ်လို့ရတယ်
+အဲ့တော့ Component တစ်ခုဘယ်လိုရေးမလဲ ဆက်ကြည့်မယ်
+
+Component က နှစ်မျိုးရေးလို့ရတယ်
+Class component
+Functional component (recommend)
+
+Functional component 
+
+function ဆိုတဲ့ အတိုင်း function name ရှိမယ်
+return value ရှိမယ်
+
+*** Function Name က အကြီးနဲ့စရမယ် ***
+
+function StudentInfo(){
+    return <div>
+      <h1>Anna</h1>
+      <img src="" alt="Profile Image" />
+      <h3>Role ID</h3>
+      <h3>Major</h3>
+      <h3>Phone Number</h3>
+      <p>Address</p>
+    </div>
+}
+
+အဲ့လိုခွဲလိုက်မယ် ပြီးရင် App ထဲမှာ ပြန်ခေါ်မယ်
+
+ဘယ်လိုခေါ် သုံးရမလဲဆိုရင်
+<StudentInfo />
+<StudentInfo></StudentInfo>
+နှစ်ခုလုံးနဲ့ ခေါ်လို့ရတယ် 
+
+<StudentInfo /> မျိုးပဲ အသုံးများတယ်
+<StudentInfo></StudentInfo> ဒါကိုဘယ်အချိန်မှာသုံးလဲဆိုရင်
+tag ထဲမှာ value တစ်ခု ထည့်ပေးလိုက်တာမျိုးဆို သုံးတယ်
+children လို့ ခေါ်တယ်
+
+<StudentInfo>Activities</StudentInfo>
+
+eg. ပြထာားတာ Activities နေရာမှာ type က string , JSX, 
+boolean, Number, null ...etc အဲ့တာတွေလည်းဖြစ်နိုင်တယ်
+
+function App() {
+  return (
+    <>
+      <StudentInfo />
+      <StudentInfo />
+    </>
+  );
+}
+
+
+ဒီလိုလေးဖြစ်သွားမယ်
+Issue က နှစ်ခုလုံး က Anna ဖြစ်နေတယ်
+
+JS function မှာဆိုရင် 
+အဲ့အတွက်က parameter က value တစ်ခု pass လုပ်ရမယ်
+
+React မှာဆိုရင် Passing props to a component 
+လို့ခေါ်တယ် props က properties
+
+အရင်ဆုံး data အတွက် Array လေးဆောက်မယ်
+const students = [
+    {id: 1, name: "Anna", profileImg: "https://images.unsplash.com/photo-1533738363-b7f9aef128ce?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y2F0fGVufDB8fDB8fHww", roleId: "Role-1" , major: "Computer Science", phoneNo: "+95 ........", address : "Yangon"},
+    {id: 2, name: "Clover", profileImg: "https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y2F0fGVufDB8fDB8fHww", roleId: "Role-10" , major: "Computer Science", phoneNo: "+95 ........", address : "Mandalay"},
+]
+
+students array ကို loop ပတ်မယ် ပြီးရင် အဲ့ student information
+ကို Component ကို pass လုပ်မယ်
+
+students.map((student) => {
+    return <StudentInfo student={student}/>
+})
+
+အဲ့အဆင့်မှာဆိုရင် Browser console မှာ error တက်မယ်
+Warning: Each child in a list should have a unique "key" prop.
+
+react က virtual dom ကို သုံးတယ် သူက update လုပ်တဲ့အချိန် 
+dom diffing algorithm ကို သုံးပြီး update ဖြစ်မဖြစ်
+key နဲ့ တိုက်စစ်တယ် key မတူတဲ့ အပိုင်းကို update လုပ်တယ်
+အစအဆုံး update လုပ်စရာမလိုဘူး 
+
+students.map((student) => {
+    return <StudentInfo student={student} key={student.id} />
+})
+key ကို လေ id ရှိရင် id / unique ဖြစ်မယ့်ဟာတစ်ခုပဲသုံးသင့်တယ်
+
+propertiesကို Pass လုပ်လိုက်ပြီ Component ထဲမှာ
+ဘယ်လိုပြန်ခေါ်မလဲဆိုရင်
+
+function StudentInfo(props)
+ကျနော်တို့ student က props.student ဖြစ်မယ်
+student က object pass လိုက်လို့
+object[key] ဆိုပြီး replace လုပ်ရင်အဆင်ပြေပြီ
+props.student.name etc
+
+function StudentInfo({student}) တိုက်ရိုက်ခေါ်ထားတာ
+student.name
+
+object destructuring ကို သုံးလည်းရတယ်
+const {name, profileImg, roleId, major, phoneNo, address} = student
+
+properties ရလာပြီ အဲ့တာကို React Component ထဲမှာ 
+ပြမယ်ဆိုရင် curly bracket ကြားထဲရေးရတယ် {name}
+
+function StudentInfo({student}){
+  const {name, profileImg, roleId, major, phoneNo, address} = student
+  return <div>
+    <h1>{name}</h1>
+    <img src={profileImg} alt="Profile" />
+    <h3>{roleId}</h3>
+    <h3>{major}</h3>
+    <h3>{phoneNo}</h3>
+    <p>{address}</p>
+  </div>
+}
+
+ဒီလိုလေးဖြစ်သွားမယ် 
+
+
+Code sample
+
+***************
+
+function StudentInfo({student}){
+  const {name, profileImg, roleId, major, phoneNo, address} = student
+  return <div>
+    <h1>{name}</h1>
+    <img src={profileImg} alt="Profile" />
+    <h3>{roleId}</h3>
+    <h3>{major}</h3>
+    <h3>{phoneNo}</h3>
+    <p>{address}</p>
+  </div>
+}
+
+function App() {
+
+  const students = [
+    {id: 1, name: "Anna", profileImg: "https://images.unsplash.com/photo-1533738363-b7f9aef128ce?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y2F0fGVufDB8fDB8fHww", roleId: "Role-1" , major: "Computer Science", phoneNo: "+95 ........", address : "Yangon"},
+    {id: 2, name: "Clover", profileImg: "https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y2F0fGVufDB8fDB8fHww", roleId: "Role-10" , major: "Computer Science", phoneNo: "+95 ........", address : "Mandalay"},
+  ]
+  return (
+    <>
+      {
+        students.map((student) => {
+          return <StudentInfo student={student} key={student.id} />
+        })
+      }
+    </>
+  );
+}
+
+
+export default App;
+
+*************** 
+
+နောက်ရက်ကျမှ css နဲ့ file split ထပ်ရေးပေးပါမယ်
+
+
+🍀🍀🍀🍀
