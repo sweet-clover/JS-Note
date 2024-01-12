@@ -1,0 +1,100 @@
+JavaScript ( Error Handling )
+
+ကျနော်တို့က application ရေးထားတယ်
+SyntaxError, TypeError စတဲ့ Error များကြီး ပါနိုင်တယ်
+
+သုံးနေရင်းနဲ့ internal server error / Something went wrong
+ဘာညာတက်လာတာမျိုး ကြံဖူးမှာပါ
+
+Code နည်းနည်းစမ်းရေးကြည့်မယ်
+
+Number မှာ toFixed ဆိုတဲ့ method လေးပါတယ်
+သူက decimal place (ဒသမနေရာ) ယူတဲ့နေရာသုံးလို့ရတယ်
+
+amount က 100 ရှိတယ် အဲ့တာကို '100.00' ဆိုပြီးပြဖို့လိုတယ်
+let amount = 100
+amount.toFixed(0) //'100'
+amount.toFixed(1) //'100.0'
+amount.toFixed(2) //'100.00'
+
+toFixed က Number နဲ့ပဲတွဲသုံးလို့ရတာ
+အခုကျနော်က amount ကို string ပြောင်းလိုက်ရင်
+error တက်သွားတယ်
+
+let amount = '100'
+console.log(amount.toFixed(2))
+console.log("welcome")
+
+Uncaught TypeError: amount.toFixed is not a function
+ဆိုပြီးရပ်သွားတယ် အောက်က console.log("welcome") က ဆက်မသွားတော့ဘူး
+
+အဲ့လိုခြေနေတွေကို control လုပ်ဖို့ Error Handling သုံးလာတယ်
+try/catch လို့လည်း အလွယ်ခေါ်ကြတယ် 
+
+ကျနော်တို့ ရေးလိုက်တဲ့ဟာက try block ထဲဝင်မယ်
+try block ထဲမှာ error တက်သွားခဲ့ရင် catch block 
+ထဲကို ရောက်မယ် 
+try block ထဲမှာ error မတက်ရင် catch block ထဲ
+မရောက်ဘူး
+finally block ထဲကို error တက်လည်းရောက်မယ်/ 
+မတက်လည်းရောက်မယ်
+
+
+try{
+    // Code you are executing
+}
+catch(error){
+    // Code to throw an exception
+}
+finally{
+    // Code that runs after either success or failure
+}
+
+အဲ့ code ကို ပြင်ရေးလိုက်မယ်
+
+***************
+
+try{
+    let amount = '100'
+    console.log(amount.toFixed(2))
+}
+catch(error){
+    console.log("error", error)
+}
+finally{
+    console.log("welcome")
+}
+
+***************
+
+error နဲ့ welcome နဲ့ထွက်လာမယ်
+
+JavaScript မှာ error တွေကို try/catch နဲ့ဖမ်းလို့ရတယ်
+
+Promise နဲ့တွဲသုံးစရာမဘူး Promise မှာ error Handling ပါလာပြီးသား
+success ဖြစ်ရင် resolve()
+error ဆိုရင် reject() ထဲဝင်သွားမယ် catch နဲ့ပြန်ဖမ်းလို့ရတယ်
+finally က success/error နှစ်မျိုးလုံးပဲ
+
+ဒါလေးက Promise နဲ့ error handling ပါပဲ
+
+***************
+
+new Promise((resolve, reject) => {
+    let amount = '100'
+    if(typeof amount === 'number'){
+        resolve(amount.toFixed(2))
+    }else{
+        reject("Error: TypeError, amount should be number!")
+    }
+})
+.then(result => console.log(result))
+.catch(error => console.log(error))
+.finally(() => console.log("welcome"))
+
+***************
+
+Error Message ရေးရင်လည်း သေချာရေးစေချင်ပါတယ်
+ဘာဖြစ်ဖြစ် Something went wrong ကြီးက အဆင်ပြေမနေပါဘူး 
+
+🍀🍀🍀🍀
