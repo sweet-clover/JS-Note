@@ -1,0 +1,150 @@
+React ( Adding styles )
+
+Component လေးရေးပြီးသွားပြီ အဲ့တာက ကြည့်ရအရမ်းဆိုးတယ်
+css နဲ့ ကြည့်ကောင်းအောင် ပြန်လုပ်မယ်
+
+1. css class ရေးချင်ရင် className ဆိုပြီးရေးရတယ်
+<div className="container">
+</div>
+
+css file တစ်ခု create လုပ်မယ် 
+ကိုယ်ထားချင်တဲ့နေရာရတယ်
+
+ကျနော် ရှိပြီးသား App.css ကိုပဲသုံးလိုက်မယ်
+
+class ဆိုတော့
+.container{
+  margin: 0 auto;
+  background-color: #cbcbcb;
+}
+
+CSS File ကို JS File ထဲမှာ import ပြန်လုပ်ဖို့လိုတယ်
+directory မှန်အောင်ကြေညာရင်အဆင်ပြေတယ်
+
+App.js ထဲမှာပဲ App.css file ကို import ပြန်လုပ်ပေးမယ်
+import './App.css'
+./ က App.css နဲ့ App.js က same directory ဖြစ်နေလို့
+
+ကျနော်တို့ က css ကို folder ထဲထည့်လိုက်မယ်
+App.js
+css/App.css (css folder အောက်မှာ App.css ဖြစ်သွားရင် )
+import './css/App.css'
+
+js နဲ့ css က same directory မဟုတ်ဘူး ဆိုရင်
+(../) go up to the parent directory 
+student/index.js
+css/index.css
+index.js ထဲမှာ index.css ကိုချိတ်ရမယ်ဆိုရင်
+index က အပြင်တစ်ဆင့်ထပ်ထွက်ရမယ် အဲ့ကျမှ css ကိုတွေ့မယ်
+အဲ့ထဲက index.css နဲ့ချိတ်မယ်
+import '../css/index.css'
+
+folder နှစ်ဆင့်ဆိုရင် ../../ နှစ်ခါဆင့်သုံးသွားလို့ရတယ်
+အဲ့လို ../ တွေက folder structure ပြောင်းတဲ့အခါ ပြသနာများတယ်
+ပြီးရင် ရှည်ပြီး code က messy  ဖြစ်လို့ path alias ကိုသုံးကြတယ်
+
+typescript သုံးတယ်ဆိုရင် tsconfig.json ထဲက 
+compilerOptions မှာ path ကြေညာပေးလို့ရတယ်
+
+အရင်တုန်းက Create React App (CRA) ကိုသုံးလို့
+Create React App Configuration Override (CRACO)
+https://www.npmjs.com/package/@craco/craco?activeTab=readme
+အဲ့တာ သုံးလည်းရတယ်
+
+typescript ပြောင်းပြီးမှ alias ပိုင်းကို သေချာပြန်ရေးပေးမယ်
+အခုက သိအောင်ပဲမှတ်ထားပေးနော် 
+
+2. incline css နဲ့သုံးလို့ရတယ်
+html မှာဆိုရင် အဲ့လိုရေးတယ်
+<h3 style="font-size: 16px; color: red;">Role ID</h3>
+
+React မှာဆိုရင် {{}} double curlies ကြားထဲမှာ ရေးရတယ်
+<h1 style={{fontSize: '20px', color: 'red'}}>{name}</h1>
+အရင်က ပြောထားတယ် properties တွေက camel case နဲ့ပဲရေးတယ်
+font-size က fontSize ဖြစ်သွားမယ်
+
+3. styled-components သုံးလို့ရတယ်
+https://www.npmjs.com/package/styled-components
+styled-components  အရင်သုံးရမယ် terminal မှာ
+npm i styled-components (or)
+yarn add styled-components
+
+သွင်းပြီးရင် package.json ထဲက
+ "dependencies": {
+    "styled-components": "^6.1.6",
+  },
+ဝင်သွားတယ်
+
+^ က 6.1.6 ထက်ကြီးတဲ့ version ရှိခဲ့ရင် ကြီးတာကိုသွင်းသွားမယ်
+မရှိခဲ့ရင် 6.1.6 ကိုပဲသွင်းသွားမှာ
+6.1.6 ကိုပဲလိုချင်ရင် "styled-components": "6.1.6" 
+^ ဖြုတ်ခဲ့လို့ရတယ်
+
+အဲ့မှာ version name က major.minor.path ဆိုပြီး သုံးပိုင်းတယ်
+major က ကြီးကြီးမားမားပြောင်းလိုက်တာမျိုး 
+         eg. API/version 1 to API/version 2
+minor က function အသစ်လေး ထပ်ထည့်တာမျိုး/
+         changes က major လောက် မများရင် တိုးတယ်
+path  က bug fix 
+
+စစချင်းရေးတယ်ဆိုရင် 0.1.0
+bug fixing ထပ်လုပ်မယ်ဆိုရင် 0.1.1
+ကိုယ်လုပ်တဲ့ changes ပေါ်မူတည်ပြီး version ကို ထပ်တိုးသွားတာ
+
+Pre-Release 1.0.0-alpha
+After-Release 1.0.0 အဲ့လိုပေးကြတယ် 
+
+
+const Wrapper = styled.section`
+  margin: 0 auto;
+  background-color: #cbcbcb;
+`;
+
+` css code ရေးရုံပဲ `
+ပြန်ခေါ်သုံးမယ်ဆိုရင် <Wrapper></Wrapper>
+ဆိုပြီးသုံးရုံပဲ components ထဲမှာ Css တစ်ခါတည်း ပါလာပြီးသား
+
+
+**************
+
+import styled from 'styled-components';
+// import './css/App.css'
+
+const Wrapper = styled.section`
+  margin: 0 auto;
+  background-color: #cbcbcb;
+`;
+
+function StudentInfo({student}){
+  const {name, profileImg, roleId, major, phoneNo, address} = student
+  return <div>
+    <h1 style={{fontSize: '20px', color: 'red'}}>{name}</h1>
+    <img src={profileImg} alt="Profile" />
+    <h3>{roleId}</h3>
+    <h3>{major}</h3>
+    <h3>{phoneNo}</h3>
+    <p>{address}</p>
+  </div>
+}
+
+function App() {
+
+  const students = [
+    {id: 1, name: "Anna", profileImg: "https://images.unsplash.com/photo-1533738363-b7f9aef128ce?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y2F0fGVufDB8fDB8fHww", roleId: "Role-1" , major: "Computer Science", phoneNo: "+95 ........", address : "Yangon"},
+    {id: 2, name: "Clover", profileImg: "https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y2F0fGVufDB8fDB8fHww", roleId: "Role-10" , major: "Computer Science", phoneNo: "+95 ........", address : "Mandalay"},
+  ]
+  return (
+    <Wrapper>
+      {
+        students.map((student) => {
+          return <StudentInfo student={student} key={student.id} />
+        })
+      }
+    </Wrapper>
+  );
+}
+
+
+export default App;
+
+**************

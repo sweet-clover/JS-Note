@@ -1,0 +1,160 @@
+React ( Components - Exercise )
+
+Codewars က Exercise လေးကို စမ်းရေးကြည့်မယ်
+
+Easter egg list in ReactJS
+
+https://www.codewars.com/kata/5a95947f4a6b342636000173/train/javascript
+
+
+စမ်းရေးချင်တယ်ဆိုရင် အောက်က ဆက်မဖတ်ဘဲ link မှာ သွားစမ်းရေးကြည့်
+
+
+You decide to create a simple list of your favourite Easter eggs in React.
+
+Challenge
+Learn about nesting and listing React components.
+
+The component EggList will set a prop called eggs 
+which is an array of your favourite easter eggs e.g. "Lindt".
+Loop through the props.eggs to output a unorder list 
+of Easter eggs.
+
+Each list item should be a component called EasterEgg 
+with a prop name, to render the name in a li tag.
+Each EasterEgg will need a key prop with a unique id. 
+Use the index of the array for now.
+About keys in React lists
+
+While you can use the index of the array for a key because 
+they should be unique among their siblings. 
+However it is better to use unique values.
+
+Keys help React identify which items have changed, are added, or are removed. Keys should be given to the elements inside the array to give the elements a stable identity
+More on Lists and Keys
+
+Component မှာ props (eggs က array ) အဲ့တာကို loop ပတ်ပြီး unorder list ကိုထုတ်ပြရမယ်
+list item မှာ props (name) ပါမယ်
+key က unique ဖြစအောင် index ကိုသုံးတယ်
+အောက်က သူ့ရဲ့ test case
+
+
+// NOTE This kata uses Jest.
+import React from "react";
+import Adapter from "enzyme-adapter-react-16";
+import Enzyme, { shallow } from "enzyme";
+Enzyme.configure({ adapter: new Adapter() });
+
+import { EggList, EasterEgg } from "./solution";
+
+describe('Magic egg list', () => {
+  let eggList;
+  beforeEach(() => {
+    eggList = shallow(<EggList eggs={["Lindt", "Cadbury", "Milka", "Maltesers"]}/>);
+  });
+  
+  it('has an unordered egg list component', () => {
+    expect(eggList.name()).toEqual('ul');
+  });
+  
+  it('has list items', () => {
+    expect(eggList.find('EasterEgg').length).toEqual(4);
+  });
+  
+  
+  it('must have key prop', () => {
+    const list = eggList.find('EasterEgg');
+    expect(list.at(0).key()).toEqual('0');
+    expect(list.at(1).key()).toEqual('1');
+    expect(list.at(2).key()).toEqual('2');
+    expect(list.at(3).key()).toEqual('3');
+  });
+  
+  it('should have an EasterEgg child component', () => {
+    expect(eggList.children().first().name()).toEqual("EasterEgg");
+    expect(eggList.children().first().props().name).toEqual("Lindt");
+  });
+});
+
+ဒါက Sample Code
+
+*********************
+
+import React from 'react';
+
+export const EggList = (props) => {
+  return <ul>{
+    props.eggs.map((egg, i) => <EasterEgg key={i} name={egg} />) 
+  }</ul>
+};
+
+export const EasterEgg = (props) => {
+  return <li>{props.name}</li>
+};
+
+*********************
+
+Test ('has an unordered egg list component')
+element က ul ဖြစ်မယ် return <ul></ul>
+return <ul></ul>
+
+Test ('has list items')
+EggList ထဲမှာ က 4ခုရှိလို့ list item length က 4 ဖြစ်ရမယ်
+<ul>
+  {
+    props.eggs.map((egg) => <li>{egg}</li>) 
+  }
+</ul>
+
+Test ('must have key prop')
+list item မှာ key ပါရမယ် unique ဖြစ်အောင်လို့ index သုံခိုင်းထားတော့ 
+key က 0,1,2,3 ဖြစ်ရမယ်
+props.eggs.map((egg,i ) => <li key={i}>{egg}</li>) 
+
+Test ('should have an EasterEgg child component')
+<EasterEgg /> Component ပါရမယ်
+<ul>
+  {
+    props.eggs.map((egg, i) => <EasterEgg key={i} name={egg} />) 
+  }
+</ul>
+
+
+ကိုယ်ရေးလိုက်တာက က test 4 ခုလုံး pass ဖြစ်ရင် success ဖြစ်သွားမယ်
+Code ရေးပြီးသွားရင် test အတွက်ပါ စဉ်းစားရမယ်
+
+EasterEgg Component အသေးလေးကို ခွဲမထုတ်ဘဲ EggList ထဲမှာ
+ထည့်ရေးလိုက်လည်းရတယ် ပြသနာက Component အသေးလေးအတွက်
+test case ရေးမယ်ဆိုရင် Component အကြီးကို ပြန်သုံးပြီး ပြန်စစ်ရမယ်
+
+Function တစ်ခုက အလုပ်တစ်ခုပဲလုပ်ရင် testing ရေးရတာလွယ်တယ်
+အဲ့တာကို Unit testing လို့ခေါ်တယ်
+
+test ရေးနည်းကို Title သက်သက်နဲ့ ထပ်ရေးပြမယ် 
+အခုမှတ်ထားရမှာက ကိုယ် က Code ရေးမယ် test အတွက်ပါ စဉ်းစားခဲ့
+Function တစ်ခုက အလုပ်တစ်ခုပဲလုပ်လို့ရအောင်ရေး
+ရေးလိုက်တဲ့ Function က Pure Function ဖြစ်ရမယ်
+
+Pure Function ဆိုတာက Same input => Same output
+
+function getRandomNumber() {
+    return Math.floor(Math.random() * 10);
+} 
+
+getRandomNumber() သူက တစ်ခါခေါ်ရင် တစ်မျိုးပြောင်းနေတာ
+side effect ပါတယ် pure function မဟုတ်ဘူး
+အဲ့အတွက် က test case ရေးလို့ အဆင်မပြေဘူး
+pure function ဖြစ်အောင် ပြင်ရေးမယ်
+
+let random = Math.random()
+function getRandomNumber(random) {
+    return Math.floor(random * 10);
+}
+
+random ကို parameter အနေနဲ့ pass ပေးလိုက်တော့ 
+random က 1 ဆို အမြဲ 10 ဖြစ်မယ်
+
+အဲ့အတွက် က test case က 1 pass ပေးလိုက်ရင် 10
+ပြန်ရမယ် test ရေးရလွယ်သွားပြီ
+
+🍀🍀🍀🍀

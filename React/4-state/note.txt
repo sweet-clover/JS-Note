@@ -1,0 +1,149 @@
+React - Part 6 ( State )
+
+State က ဘာအတွက်သုံးတာဆိုရင်
+data ကို သိမ်းဖို့အတွက်သုံးတာ
+
+data ကို သိမ်းတာပဲဟာ ဒီတိုင်းပဲ variable ထဲ
+ကောက်ထည့်ပြီးသိမ်းလို့ မရဘူးလားဆိုရင် သိမ်းလို့က ရတယ် 
+data ကိုပြင်လိုက်တာမျိုးဆိုရင် DOM မှာ မပြောင်းသွားတာ
+
+DOM မှာ update ဖြစ်အောင် ဘယ်လိုလုပ်ရမလဲဆိုရင်
+State ကို update လုပ်ရမယ်
+Sate ပြောင်းသွားတာနဲ့ Component က re-render ပြန်လုပ်သွားတယ်
+
+(ဂျာအေးကို သူ့အမေရိုက်တာထက်ဆိုးနေပြီ) 
+ရေးကြည့်ကြမယ် အဲ့တာမှ မြင်မှာ
+
+App.js ထဲမှာ Counter တစ်ခုရေးကြည့်ကြမယ်
+
+<button onClick={handleIncrease}>+</button>
+onClick မှာ handleIncrease function ကို ခေါ်ထားတယ်
+
+const handleIncrease = () => {
+    count+=1
+    console.log("handleIncrease ", count)
+}
+
+count ကို 1 တိုးထားပြီး count ကို console ထုတ်ထားတယ်
+
+**********************
+
+function App() {
+  let count = 0
+  
+  const handleIncrease = () => {
+    count+=1
+    console.log("handleIncrease ", count)
+  }
+
+  const handleDecrease = () => {
+    count-=1
+    console.log("handleDecrease ", count)
+  }
+
+  return(
+    <div>
+      <button onClick={handleIncrease}>+</button>
+      <span>{count}</span>
+      <button onClick={handleDecrease}>-</button>
+    </div>
+  )
+}
+
+export default App;
+
+**********************
+
+အခုပြထားတဲ့ code ကို ‌ ရေးပြီးရင် browser မှာ run ကြည့်လိုက်
+console ပါဖွင့်ထား
+button ကို click နှိပ်ရင် count value က console မှာ ပြောင်းသွားတယ်
+browser ပေါ်မှာ မပြောင်းသွားဘူး
+
+အဲ့တာကြောင့် counter value က ပြောင်းသွားပါပြီ DOM ကို update လုပ်ပေးပါဆိုပြီး ကျနော်တို့က သူ့ကို ပြောပြရမယ်
+
+counter value ပြောင်းသွားတာကို သူနားလည်အောင် ဘယ်လိုပြောပြရမလဲ
+ဆိုရင် State ကိုသုံးရမယ် State ပြောင်းသွားရင် DOM diffing ပြန်လုပ်ရမယ်ဆိုတာ သူက နားလည်တယ် 
+
+Note: React က Virtual DOM ကို သုံးတယ် 
+သူက တစ်ခုခုပြင်ရင် အစအဆုံး replace မဟုတ်ဘူး
+difference ဖြစ်တဲ့နေရာပဲ Merge လုပ်တော့ 
+ရိုးရိုး DOM ထက် ပိုမြန်တယ်
+
+..........................
+
+State
+
+React မှာ State ကို သုံးချင်ရင် useState ဆိုတာရှိတယ်
+သူက React Hook
+
+const [state, setState] = useState(initialState)
+
+initialState က စစချင်း ခြေနေ 
+counter example မှာ စစချင်း 1 က စချင်ရင်
+initialState ကို 1 ထားလိုက်ရင် ရတယ်
+
+useState က function ပဲ array return ပြန်တာ
+array ထဲမှာ current state နဲ့ set function နဲ့နှစ်ခုပါတယ်
+
+let [count, setCount] = useState(0) // initialState = 0
+
+count => current state
+setCount => set function
+
+current state - လက်ရှိတန်ဖိုး
+
+counter က စစချင်း 0 => current state က 0
+1 တိုးလိုက်မယ်ဆိုရင် current state 1
+1 ထပ်တိုးလိုက်မယ်ဆိုရင် current state 2
+
+set function - current state ထဲက တန်ဖိုးကိုပြောင်းချင်ရင် set function
+သုံးလို့ရတယ်
+
+1 တိုးလိုက်မယ် ဆိုတဲ့ process က set function က လုပ်ရမယ့်အလုပ်
+ဖြစ်သွားမယ် setCount(count+=1) 
+current state + 1
+
+const handleIncrease = () => {
+    setCount(count+=1)
+    console.log("handleIncrease ", count)
+}
+
+..........................
+
+import { useState } from "react"
+
+
+function App() {
+  let [count, setCount] = useState(0)
+
+  const handleIncrease = () => {
+    setCount(count+=1)
+    console.log("handleIncrease ", count)
+  }
+
+  const handleDecrease = () => {
+    setCount(count-=1)
+    console.log("handleDecrease ", count)
+  }
+
+  return(
+    <div>
+      <button onClick={handleIncrease}>+</button>
+      <span>{count}</span>
+      <button onClick={handleDecrease}>-</button>
+    </div>
+  )
+}
+
+..........................
+
+ထပ်ရေးလိုက်တဲ့ Code အရ
+DOM မှာလည်း ပြောင်းသွားပါပြီ State ကို ဘာလို့သုံးလဲဆိုတာ
+မြင်လောက်ပြီထင်ပါတယ်
+
+Class Component က နောက်မှ ပြောပြပါမယ်
+React က functional component ဘက်ကို ပိုဦးစားပေးလို့ပါ
+
+Ref: https://react.dev/reference/react/useState
+
+🍀🍀🍀🍀
