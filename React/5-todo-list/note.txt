@@ -1,0 +1,257 @@
+React - Part 7 ( To Do List )
+
+React မှာ Component, Props, State လေ့လာခဲ့ပြီးပြီ
+အခု Project သေးသေးလေး စမ်းရေးကြည့်မယ်
+
+To Do List ဆိုတဲ့အတိုင်း
+သူ့မှာ လုပ်ရမယ့် task လေးတွေရှိမယ်
+
+task ကို ပြီးသွားတဲ့ task လား
+မပြီးသေးတဲ့ task လား ခွဲရမယ်
+
+ပြီးသွားတဲ့ task တွေကို အောက် ဘက် မှာပြမယ်
+မပြီးသေးတာကို အပေါ် မှာ ပြမယ်
+
+သေးသေးလေး စမ်းရေးကြည့်ကြမယ်
+
+............................
+
+task ကို စ စဉ်းစားမယ် 
+သူ့မှာ id နဲ့ name ရှိမယ် 
+id/name က unique ဖြစ်ရမယ် ထပ်လို့မရရဘူး 
+task ကို ပြီးပြီလား /မပြီးသေးဘူးလား စစ်မှာကို completed လို့ထားလိုက်မယ်
+task create လုပ်လိုက်တဲ့အချိန်ရှိမယ်
+property တွေများလို့ obj သုံးမယ် 
+{id: 1, name : "Report", completed: false , createdAt: '2024-15-01 12:00:00' }
+
+
+ပြီးရင် task တွေ အကုန်စုထည့်ရမယ့် array တစ်ခုလိုမယ်
+tasks လို့နာမည်ပေးလိုက်မယ်
+singular (task) and plural (tasks) သုံးထားတယ်
+const [tasks, setTasks] = useState([])
+
+
+ui စဉ်းစားကြမယ် input တစ်ခုရှိမယ် input မှာ task ကို ရိုက်ထည့်မယ်
+input box ထဲ စာရိုက်ထည့်ရင် onChange event handler အလုပ်လုပ်မယ်
+သူက event တစ်ခုကို ကို fire လုပ်လိုက်တယ်
+ရိုက်ထည့်လိုက်တဲ့ တန်ဖိုးတွေက event.target.value ထဲမှာရှိတယ်
+text box မဟုတ်ဘဲ checkbox ဆိုရင် event.target.checked ထဲမှာရှိတယ်
+
+<input type="text" onChange={handleTextChange}/>
+const handleTextChange = (event) => {
+    setText(event.target.value)
+}
+
+Note:  
+ကျနော်မှာက input box က တစ်ခုတည်းသုံးရမှာဆိုတော့ form မသုံးတော့ဘူး
+state ကို သုံးပြီးပဲ input value ကို handle လုပ်လိုက်မယ်
+အဲ့တာကို React မှာ Controlled components 
+(Controlling an input with a state variable ) လို့ခေါ်တယ် 
+
+
+ပြီးရင် button တစ်ခုရှိမယ် button ကို click နှိပ်လိုက်ရင် 
+input မှာရိုက်ထည့်ထားတဲ့ text ကို task obj ပြောင်းပြီး 
+tasks array ထဲကို ထည့်မယ်
+
+<button onClick={addTask}>Add</button>
+const addTask = () => {
+    let task = {
+      id: tasks.length+1,
+      name: text,
+      completed: false,
+      createdAt: new Date()
+    }
+    setTasks([...tasks, task])
+}
+
+အသစ်ထပ်ထည့်တဲ့ process မှာဆိုရင် id က မလိုဘူး သူက database
+နဲ့ ချိတ်လိုက်ရင် database မှာပါတဲ့ id ကို သုံးတာများတယ်
+အခုက db နဲ့ မချိတ်ထားလို့ ကိုယ့်ဘာသာထည့်လိုက်တာ
+
+new Date() က လက်ရှိအချိန် eg. "2024-01-15T13:41:30.894Z" 
+createdAt ကလည်း database မှာ default-timestamp ထည့်တာဖြစ်ဖြစ်
+api server ဘက်က ထည့်တာဖြစ်ဖြစ် လုပ်ထားလို့ရတယ်
+အခုက ဘာမှ မချိတ်ထားလို့ ထည့်ထားတာ
+
+task က ရှိပြီးသားဆိုရင် ရှိပြီးသား + အသစ်ထပ်ထည့်တာဖြစ်သွားမယ်
+[...tasks, task]
+
+
+tasks ထဲမှာ ရှိတာတွေကို ပြန်ထုတ်ပြရမယ်
+todo ဆိုတော့ task လေးတွေရှေ့မှာ checkbox ရှိမယ်
+
+{
+    tasks.map((task) => {
+        return <div key={task.id}>
+            <input
+                type="checkbox"
+            />
+            {task.name}
+        </div>
+    })
+}
+
+checkbox ကို check လိုက်ရင် completed က true ဖြစ်သွားမယ်
+task တွေက အများကြီးရှိတယ် အဲ့တော့ ကျနော်တို့ က သူဘယ် task
+ကို completed ဖြစ်သွားပါတယ်ဆိုတာမျိုးကို သိဖို့လိုတယ်
+event နဲ့ task id ကို pass ပေးလိုက်တယ်
+
+<input
+    type="checkbox"
+    onChange={(event) => handleCheckboxChange(event, task.id)}
+/>
+
+const handleCheckboxChange = (event, id) => {
+    console.log(id, event.target.checked)
+}
+
+checked လုပ်လိုက်ရင် id နဲ့တိုက်ရှာပြီး completed ကို true ထားမယ်
+unchecked လုပ်လိုက်ရင် completed က false ဖြစ်သွားမယ်
+
+အဲ့တာကို !task.completed လို့ရေးလို့ရတယ်
+! က logical NOT (!) ပြောင်းပြန်ပဲ true ဆို false, false ဆိုရင် true
+
+obj property ကို ပြောင်းမှာမိုလို့ map သုံးမယ် ပြီးရင် state ကို update လုပ်မယ်
+
+const handleCheckboxChange = (event, id) => {
+    let newTasks = tasks.map((task) => {
+        if(task.id === id){
+            return {...task, completed: !task.completed}
+        }else{
+            return task
+        }
+    })
+    setTasks(newTasks)
+}
+
+task ရှေ့က checkbox က checked လုပ်ထားရင် check ပေါ်နေရမယ်
+input checkbox မှာဆိုရင် checked ဆိုတဲ့ attribute ရှိတယ်
+checked=true ဆိုရင် checkbox လေးက check လုပ်ပြီးသား
+
+<input
+    type="checkbox"
+    checked={task.completed}
+    onChange={(event) => handleCheckboxChange(event, task.id)}
+/>
+
+ဒီအထိဆိုရင် input ထည့်တယ် completed change တဲ့ step လေးပြီးသွားပြီ
+
+............................
+
+issue က 
+task ထည့်ပြီးသွားရင် input က clear မဖြစ်သွားဘူး
+task တူတာကို ထည့်လို့ရနေတယ်
+
+input က clear ဖြစ်ဖို့က add button ကိုနှိပ်လိုက်ရင် 
+text ကို '' ပြန်ထည့်ရမယ်
+setText('')
+input ရဲ့ value က text ဖြစ်ရမယ်
+<input type="text" value={text} onChange={handleTextChange} />
+
+task တူတာကိုထိန်းမှာက add button ကိုနှိပ်လိုက်ရင် 
+text ထဲက name က tasks array ထဲမှာ ရှိပြီးသားလားသွားရှာ
+ရှိရင် alert ပြလိုက်မယ်
+find နဲ့ရှာမယ် find method ကတွေ့ရင် obj return ပြန်တယ် 
+မတွေ့ရင် undefined
+
+let check = tasks.find((task) => task.name === text)
+
+const addTask = () => {
+    let check = tasks.find((task) => task.name === text)
+    if(check){
+      alert("Task is already exist!")
+    }else{
+      let task = {
+        id: tasks.length + 1,
+        name: text,
+        completed: false,
+        createdAt: new Date()
+      }
+      setTasks([...tasks, task])
+      setText('')
+    }
+}
+
+နောက်ထပ်စဥ်းစားရမှာက input ကို ဒီတိုင်းလက်ခံထားတယ်
+user က space ရိုက်မယ်ဆိုရင် 'dd ' အဲ့လိုတွေဝင်လာမှာ
+အဲ့တော့ ကျနော်တို့က trim ဆိုတဲ့ method ဆိုပြီး space တွေကို
+ချန်ခဲ့လို့ရတယ်
+
+eg. ' dd '.trim() => 'dd'
+trim က left/right နှစ်ခုလုံး 
+left ပဲလုပ်ချင်တယ်ဆိုရင် trimLeft() 
+right လုပ်ချင်တယ်ဆိုရင် trimRight()
+
+............................
+
+import { useState } from "react"
+
+function App() {
+
+  const [text, setText] = useState('')
+  const [tasks, setTasks] = useState([])
+
+  const handleTextChange = (event) => {
+    setText(event.target.value.trim())
+  }
+
+  const addTask = () => {
+    let check = tasks.find((task) => task.name === text)
+    if(check){
+      alert("Task is already exist!")
+    }else{
+      let task = {
+        id: tasks.length + 1,
+        name: text,
+        completed: false,
+        createdAt: new Date()
+      }
+      setTasks([...tasks, task])
+      setText('')
+    }
+  }
+
+  const handleCheckboxChange = (event, id) => {
+    let newTasks = tasks.map((task) => {
+      if(task.id === id){
+        return {...task, completed: !task.completed}
+      }else{
+        return task
+      }
+    })
+    setTasks(newTasks)
+  }
+
+  return (
+    <div>
+      <div>
+        <input type="text" value={text} onChange={handleTextChange} />
+        <button onClick={addTask}>Add</button>
+      </div>
+      <div>
+        {
+          tasks.map((task) => {
+            return <div key={task.id}>
+              <input
+                type="checkbox"
+                checked={task.completed}
+                onChange={(event) => handleCheckboxChange(event, task.id)}
+              />
+              {task.name}
+            </div>
+          })
+        }
+
+      </div>
+    </div>
+  )
+}
+
+export default App;
+
+............................
+
+ဒီနေ့က ဒီလောက်ပါပဲ Component ခွဲတာတွေ edit/delete 
+ထည့်တာတွေက နောက်ရက် တစ်ပိုင်း ထပ်ရေးကြပါမယ်
+
+🍀🍀🍀🍀
