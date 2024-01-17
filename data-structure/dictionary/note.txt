@@ -1,0 +1,8 @@
+Data Structures in JavaScript -  Part 8 ( Dictionaries )
+
+Dictionary က လူတိုင်း ကြည့်ဖူးမှာပါ
+dictionary - အဘိဓာန်
+
+သူ့မှာ key (dictionary) ရှိမယ် value (အဘိဓာန်) ရှိမယ်
+[key, value] တွေတွဲသိမ်းတာကို dictionary လို့ခေါ်တယ်
+

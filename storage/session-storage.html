@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Session Storage</title>
+    <script>
+        if(sessionStorage.getItem("token")){
+            console.log("already exist")
+        }else{
+            sessionStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9")
+            console.log("add new.")
+        }
+        console.log(sessionStorage.getItem("token"))
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

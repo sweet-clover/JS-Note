@@ -1,0 +1,15 @@
+React - Part 8 ( To Do List )
+
+Part 6, 7 မှာ ရေးခဲ့ပြီးသွားပြီ
+Issue က Page Reload လုပ်လိုက်တာနဲ့ dat‌a မကျန်တော့ဘူး
+လုပ်ငန်းခွင်မှာဆိုရင် data တွေက database ထဲရှိပြီး
+data ပြန်ပြမယ်ဆိုရင် database ထဲက ပြန်ဆွဲထုတ်ပြမှာဆိုတော့
+local storage သုံးစရာမလိုဘူး
+
+အခု ကျနော်တို့ ရေးနေတာက database နဲ့ ချိတ်ထားတာမရှိတော့ data သိမ်းမယ်ဆိုရင်
+browser မှာ ရှိတဲ့ local storage, cookies, session  ထဲမှာသိမ်းလို့ရတယ်
+
+local storage
+
+
+🍀🍀🍀🍀

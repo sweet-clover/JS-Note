@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Storage</title>
+    <script>
+        if(!localStorage.getItem("tasks")){
+            let list = [
+                {
+                    "id": 1,
+                    "name": "add styles",
+                    "completed": false,
+                    "createdAt": "2024-01-17T03:45:54.924Z"
+                },
+            ]
+            localStorage.setItem("tasks", JSON.stringify(list))
+            console.log("add tasks.")
+        }else{
+            console.log("tasks already exist.")
+        }
+
+        console.log("tasks",localStorage.getItem("tasks"))
+
+        // string ဖြစ်နေမှာမိုလို့ object ပြန်ပြောင်းချင်ရင် 
+        console.log("tasks obj",JSON.parse(localStorage.getItem("tasks")))
+
+        //localStorage.removeItem("tasks")
+        //tasks ကို delete လုပ်လိုက်တာ  
+    </script>
+</head>
+<body>
+</body>
+
+</html>

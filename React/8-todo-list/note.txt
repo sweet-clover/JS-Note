@@ -1,0 +1,236 @@
+React - Part 8 ( To Do List )
+
+Part 7 မှာ add task လုပ်တဲ့အပိုင်းရေးခဲ့တယ်
+အခုက ထည့်ထားတဲ့ task ကို delete နဲ့ update လုပ်တာ
+ဆက်ရေးကြမယ်
+
+Delete Task
+
+/*********  Logic  *********/
+delete လုပ်မယ်ဆိုရင် စဉ်းစားရမှာက
+tasks တွေက အများကြီး သူက ဘယ် task ကို ဖျက်ချင်တာလဲ
+သိရအောင် task တစ်ခုစီရဲ့ ဘေးနားမှာ delete button 
+ထည့်ပေးလိုက်မယ် အဲ့ delete button ကိုနှိပ်မယ်ဆိုရင် 
+သူ့ဘေးနားမှာရှိတဲ့ task က delete ဖြစ်သွားမယ်
+
+/*********  Coding  *********/
+delete button ကိုနှိပ်ရင် task ရဲ့ id ကို pass ပေးလိုက်မယ်
+id နဲ့တိုက်တာကို tasks array ထဲသွားရှာပြီး delete လုပ်မယ်
+သွားရှာတာကို filter သုံးမယ် id နဲ့ မတူတာတွေပြန်ရှာပြီး
+state ကို update လုပ်လိုက်မယ်
+
+<button onClick={() => deleteTask(task.id)}>Delete</button>
+const deleteTask = (id) => {
+  const newTasks = tasks.filter((task) => task.id !== id)
+  setTasks(newTasks)
+}
+
+id နဲ့ မတူတာတွေပဲ tasks ထဲမှာ ကျန်ခဲ့မှာပါ
+
+................................
+
+Update Task
+
+/*********  Logic  *********/
+
+update လုပ်မယ်ဆိုလည်း delete အတိုင်းပဲ
+သူက task တွေ အများကြီးပဲ 
+ဘယ် task ကို ပြင်မှာလဲသိအောင် 
+task တစ်ခုစီရဲ့ ဘေးနားမှာ edit button 
+ထည့်ပေးလိုက်မယ် အဲ့ edit button ကိုနှိပ်မယ်ဆိုရင် 
+သူ့ဘေးနားမှာရှိတဲ့ task က input box ထဲ ပေါ်လာရမယ်
+Add Button အစား Edit Button ဖြစ်သွားရမယ်
+Edit Button ကိုနှိပ်လိုက်ရင် Task က update ဖြစ်သွားရမယ်
+
+/*********  Coding  *********/
+
+အဲ့မှာ စဉ်းစားရမှာက ကျနော်တို့က input တစ်ခုတည်းသုံးထားတယ်
+သူက add လုပ်တာလား / ပြင်တာလား မသိဖြစ်နေတယ်
+state တစ်ခု ထပ်ထည့်လိုက်မယ်
+const [editId, setEditId] = useState(null)
+edit button ကိုနှိပ်လိုက်ရင် editId ထဲ task id ဝင်သွားမယ်
+
+task က input box ထဲ ပေါ်ဖို့က edit button ကို
+နှိပ်လိုက်ရင် task ကို pass လုပ်မယ် setText ထဲကို task.name
+ထည့်လိုက်မယ်
+<button onClick={() => handleEdit(task)}>Edit</button>
+const handleEdit = (task) => {
+  setText(task.name)
+  setEditId(task.id)
+}
+
+edit လုပ်မယ်ဆို input နောက်က button က Add စာသားက Update ဖြစ်သွားရမယ်
+<button onClick={handleTask}>{edit ? 'Update' : 'Add' }</button>
+
+Conditional (ternary) operator
+condition ? exprIfTrue : exprIfFalse
+condition ရှိရင် exprIfTrue က အလုပ်လုပ်မယ် 
+condition က false ဆိုရင် exprIfFalse က အလုပ်လုပ်မယ်
+
+input ထဲရိုက်ထည့်ပြီး Edit Button နှိပ်လိုက်ရင်
+tasks ထဲက id နဲ့ state (editId) တူတာကို သွားရှာပြီး name ကို update လုပ်ပေးရမယ်
+map ကို သုံးမယ်
+state ကို update လုပ်လိုက်မယ်
+
+function ထပ်မခွဲတော့ဘူး handleTask ကို ပဲ 
+condition ထည့်ပြီးရေးလိုက်မယ်
+
+const handleTask = () => {
+  let check = tasks.find((task) => task.name === text)
+  if(check){
+    alert("Task is already exist!")
+  }else{
+    if(editId){
+      editTask()
+    }else{
+      addTask()
+    }
+  }
+}
+
+editId က ရှိရင် update အလုပ်လုပ်မယ်
+editId မရှိခဲ့ ဆိုရင် add လုပ်မယ်
+
+const editTask = () => {
+  let newTasks = tasks.map((task) => {
+    if(task.id === editId){
+      return {...task, name: text}
+    }else{
+      return task
+    }
+  })
+  setTasks(newTasks)
+  setText('')
+  setEditId(null)
+}
+
+update လုပ်ပြီးရင် editId ကို null ပြန်ထားဖို့လိုတယ်
+မဟုတ်ရင် အဲ့ id ကိုပဲသွားပြင်နေမှာ
+
+Issue: ရှေ့အပိုင်းမှာ trim ကို event target value
+ဖမ်းတဲ့ အချိန် text ထဲ update လုပ်ခဲ့တဲ့ အချိန်သုံးခဲ့တယ်
+
+ပြသနာက textbox မှာ space ပါတာ ရိုက်မရတော့တာပဲ
+အဲ့ issue ကို ရှင်းဖို့က tasks ထဲကို ထည့်တဲ့အချိန်မှာပဲ
+trim လုပ်လိုက်မယ်
+
+
+***************************
+
+import { useState } from "react"
+
+function App() {
+
+  const [text, setText] = useState('')
+  const [editId, setEditId] = useState(null)
+  const [tasks, setTasks] = useState([])
+
+  const handleTextChange = (event) => {
+    setText(event.target.value)
+  }
+
+  const handleCheckboxChange = (event, id) => {
+    let newTasks = tasks.map((task) => {
+      if(task.id === id){
+        return {...task, completed: !task.completed}
+      }else{
+        return task
+      }
+    })
+    setTasks(newTasks)
+  }
+
+  const deleteTask = (id) => {
+    const newTasks = tasks.filter((task) => task.id !== id)
+    setTasks(newTasks)
+  }
+
+
+  const handleEdit = (task) => {
+    setText(task.name)
+    setEditId(task.id)
+  }
+
+  const handleTask = () => {
+    let check = tasks.find((task) => task.name === text.trim())
+    if(check){
+      alert("Task is already exist!")
+    }else{
+      if(editId){
+        editTask()
+      }else{
+        addTask()
+      }
+    }
+  }
+
+  const addTask = () => {
+    let task = {
+      id: tasks.length + 1,
+      name: text.trim(),
+      completed: false,
+      createdAt: new Date()
+    }
+    setTasks([...tasks, task])
+    setText('')
+  }
+
+  
+  const editTask = () => {
+    let newTasks = tasks.map((task) => {
+      if(task.id === editId){
+        return {...task, name: text.trim()}
+      }else{
+        return task
+      }
+    })
+    setTasks(newTasks)
+    setText('')
+    setEditId(null)
+  }
+
+  return (
+    <div>
+      <div>
+        <input type="text" value={text} onChange={handleTextChange} />
+        <button onClick={handleTask}>{editId ? 'Update' : 'Add' }</button>
+      </div>
+      <div>
+        {
+          tasks.map((task) => {
+            return <div key={task.id}>
+              <input
+                type="checkbox"
+                checked={task.completed}
+                onChange={(event) => handleCheckboxChange(event, task.id)}
+              />
+              {task.name}
+              <button onClick={() => handleEdit(task)}>Edit</button>
+              <button onClick={() => deleteTask(task.id)}>Delete</button>&nbsp;
+            </div>
+          })
+        }
+
+      </div>
+    </div>
+  )
+}
+
+export default App;
+
+
+***************************
+
+
+function တော့ စုံနေပါပြီ Component ခွဲတာရယ်
+style ထည့်တာရယ် 
+Page Reload လုပ်လိုက်ရင် dat‌a မရှိတော့တာကို
+ရှင်းတာလိုပါသေးတယ်
+
+အခုက ရှေ့ထားရေးထားတာတွေ အကုန်ပေါင်းရေးထားတော့
+နားမလည်တဲ့နေရာရှိတာဖြစ်ဖြစ် နားလည်သွားလို့ပဲဖြစ်ဖြစ်
+message ပို့ပေးလို့ရပါတယ်
+
+ကျနော် အားတာနဲ့ ပြန်ဖြေပေးပါမယ်
+
+🍀🍀🍀🍀

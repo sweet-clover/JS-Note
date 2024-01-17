@@ -1,0 +1,199 @@
+JavaScript ( Local Storage, Session Storage And Cookies )
+
+ပထမပုံလေးကို ကြည့်ကြည့်လိုက် browser မှာ သုံးနေတဲ့ facebook
+က သိမ်းထားတာလေးတွေ
+
+သူဆိုရင် local storage, session storage, cookies သုံးခု
+လုံးသုံးထားတာမျိုး local storage မှာ သိမ်းထားတာနဲ့ 
+ကျန်တာတွေမှာ သိမ်းထားတဲ့ တန်ဖိုးတွေက မတူဘူး
+
+
+ဘာလို့ကျနော်တို့က browser မှာ Storage ဘာလို့လိုတာလဲဆက်စဉ်းစားကြည့်မယ်
+
+browser ဆိုတာက ( Client ) နဲ့တူတယ်
+ကျနော်တို့က local မှာ application လေးတစ်ခုရေးနေတယ်ဆိုရင် 
+application run ထားတာက local server ပဲ
+
+react မှာတုန်းက project run ပြီး http://localhost:3000 အဲ့လို 
+browser မှာ ရိုက်ထည့်ရင် ကျနော်တို့ ရေးနေတာလေးက တက်လာတယ်
+
+အဲ့လို အလုပ်လုပ်သွားဖို့က ဘာကလုပ်သွားတာလဲဆိုရင် http protocol က
+အလုပ်လုပ်သွားတာ သူက browser (client) နဲ့ server နဲ့ ချိတ်ပေးထားတာ
+
+
+client ကနေ server ဆီကို request လုပ်လိုက်မယ် 
+server ကနေ client ဆီကို response ပြန်လိုက်မယ်
+အဲ့ကြားထဲက အလုပ်ကို HTTP protocol 
+(Networking အပိုင်းက လုပ်သွားမယ်)
+ဒုတိယ ပုံမှာဆိုရင် request format နဲ့ response format sample ပါတယ်
+request လုပ်တယ်ဆိုရင် HTTP METHOD တွေဖြစ်တဲ့ GET, POST, PUT, PATCH, DELETE 
+အဲ့တာတွေ အလုပ်လုပ်ပုံကို နားလည်ရမယ်
+response ပြန်တယ်ဆိုရင် Status Code ဖြစ်တဲ့ 200, 201, 403, 404, 500
+အဲ့တာတွေကို နားလည်ရပါမယ်
+
+
+IT field ကျောင်းသားတွေဆိုရင် Networking အပိုင်း
+The OSI 7 Layers တွေသင်ခဲ့ရမှာပါ
+Application Layer, Presentation Layer, Session Layer
+... etc. 
+
+HTTP (Hypertext Transfer Protocol) is an application layer protocol.
+
+ကျနော်တို့က စစချင်း
+
+https://www.facebook.com/ အဲ့လိုဝင်လိုက်တယ်
+login မဝင်ရသေးရင် login ဝင်ခိုင်းတယ် မသုံးချင်တော့ရင် browser ပိတ်လိုက်တယ်
+နောက်ရက်ကျတော့ ပြန်ဝင်ကြည့်တယ် https://www.facebook.com/ 
+login ဝင်စရာမလိုတော့ဘူး
+
+url ကွာသွားလားဆိုတော့ မကွာဘူး သူက login ဝင်ထားတာလား/ မလုပ်ရသေးတာလား ဘယ်လိုသိတာလဲ login ဝင်ထားပါတယ်ဆိုတဲ့ state ကို 
+http protocol က သိမ်းထားပေးနိုင်လား ဆိုရင် 
+http protocol က stateless ပဲ state မထိန်းပေးနိုင်းဘူး သူ့အလုပ်က 
+request/response ပဲ
+
+အဲ့လို state data လေးကို သိမ်းဖို့ Local Storage, Session Storage And Cookies 
+အဲ့တာကို သုံးလာကြတယ်
+
+Note: Storage တွေက string ပဲသိမ်းလို့ရတာ Object ကို သိမ်းထားချင်ရင်
+Object ကို string ပြောင်းမယ် JSON.stringify() သုံးလို့ရတယ်
+string ကို obj ပြောင်းချင်ရင် JSON.parse() သုံးလို့ရတယ်
+
+Storage ကို ကြည့်ချင်ရင် Console ဖွင့် Application Tab
+Side bar ထဲက Storage ထဲမှာရှိတယ်
+
+.....................
+
+Local Storage
+
+ကျနော်တို့က browser မှာ data ကို သိမ်းထားချင်ရင် local storage ကို သုံးလို့ရတယ်
+local storage က expire မရှိဘူး user က storage ထဲက data ကို ဖျက်မှပဲ
+data ပျက်သွားမယ် 
+
+key က နာမည်နဲ့တူတယ်
+data သိမ်းမယ်ဆိုရင် localStorage.setItem(key, value)
+
+storage ထဲက ပြန်လိုချင်တယ်ဆိုရင် localStorage.getItem(key)
+
+ဖျက်ချင်ရင်တယ်ဆိုရင် localStorage.removeItem(key)
+
+Local Storage ထဲမှာ သိမ်းထားတာ အကုန်ရှင်းချင်တယ်ဆိုရင် 
+localStorage.clear()
+
+*********************
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Storage</title>
+    <script>
+        if(!localStorage.getItem("tasks")){
+            let list = [
+                {
+                    "id": 1,
+                    "name": "add styles",
+                    "completed": false,
+                    "createdAt": "2024-01-17T03:45:54.924Z"
+                },
+            ]
+            localStorage.setItem("tasks", JSON.stringify(list))
+            console.log("add tasks.")
+        }else{
+            console.log("tasks already exist.")
+        }
+
+        console.log("tasks",localStorage.getItem("tasks"))
+
+        // string ဖြစ်နေမှာမိုလို့ object ပြန်ပြောင်းချင်ရင် 
+        console.log("tasks obj",JSON.parse(localStorage.getItem("tasks")))
+
+        //localStorage.removeItem("tasks")
+        //tasks ကို delete လုပ်လိုက်တာ  
+    </script>
+</head>
+<body>
+</body>
+</html>
+
+*********************
+
+console မှာ add tasks ထွက်လာမယ် tasks obj လည်းထွက်လာမယ်
+browser မှာ file ပိတ်လိုက်မယ် ပြီးရင် file ကို ပြန် run ကြည့်မယ်
+
+နောက်တစ်ခါ ပြန် run ကြည့်တဲ့ အချိန်
+tasks already exist. ဆိုပြီးပြမယ်ု့local storage က user ကိုယ်တိုင် ဖျက်မှ ပျက်မှာမို့လို့
+
+.....................
+
+Session Storage
+
+သူက localStorage နဲ့ တော်တော်ဆင်တယ်
+
+sessionStorage.setItem(key, value)
+sessionStorage.getItem(key)
+sessionStorage.removeItem(key)
+sessionStorage.clear()
+
+သူက ဘယ်နေရာမှာ သုံးသင့်လဲဆိုရင် sensitive data လိုမျိုးကို သိမ်းသင့်တယ် ကျနော့် မှာ token တစ်ခုတစ်ခုရှိတယ် အဲ့ token ကို browser ပိတ်လိုက်တာနဲ့ ရှင်းလိုက်စေချင်တယ် storage ထဲမှာ မကျန်စေချင်ဘူး ဆိုရင် 
+အဲ့တာကို သုံးလို့ရတယ်
+
+*********************
+
+<script>
+    if(sessionStorage.getItem("token")){
+        console.log("already exist")
+    }else{
+        sessionStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9")
+        console.log("add new.")
+    }
+    console.log(sessionStorage.getItem("token"))
+</script>
+
+*********************
+
+console မှာ add new. ထွက်လာမယ် token လည်းထွက်လာမယ်
+browser မှာ file ပိတ်လိုက်မယ် ပြီးရင် file ကို ပြန် run ကြည့်မယ်
+
+နောက်တစ်ခါ ပြန် run ကြည့်တဲ့ အချိန်
+add new. ထွက်လာမယ်
+sesion storage က user browser ပိတ်လိုက်တာနဲ့ ပျက်သွားပြီ 
+ပြန် run တိုင်း အသစ်ပြန်ထုတ်သလိုဖြစ်နေတာ
+
+.....................
+
+Cookies
+
+ကျနော့် တို့သိမ်းမယ့် data လေးက size သေးတယ်ဆိုရင် Cookies သုံးလို့ရတယ်
+size နည်းနည်းကြီး တယ်ဆိုရင် local storage , session ကို သုံးသင့်တယ်
+cookie ရဲ့ အားသာချက်ကတော့ အချိန်သက်မှတ်ပြီး expire ပေးလို့ရတာပါပဲ
+
+Example ပြောမယ်ဆိုရင် login နာရီဝက်ပဲပေးမယ်ဆိုရင် 
+login ဝင်တာနဲ့ cookie ကို တစ်ခုကို အချိန် နာရီဝက်နဲ့ create လုပ်ပေးလိုက်မယ်
+နာရီဝက်ပြည့်တာနဲ့ သူက cookie ကို auto ဖျက်လိုက်မယ်
+cookie မရှိတော့တာနဲ့ logout ပြန်ဖြစ်သွားမယ်
+
+
+Create လုပ်မယ်ဆိုရင်
+<script>
+    document.cookie = "auth=true;max-age=" + 5*60
+</script>
+
+clear လုပ်မယ်ဆိုရင်
+document.cookie = "auth=";
+
+နောက်ဆုံးပုံမှာ တွဲပေးထားတယ် time က 5 minutes ပဲရမယ်
+
+Chrome ဆိုရင် cookies option ကို allow လုပ်ပေးထားရပါမယ်
+
+Cookie data ကို လိုချင်ရင် string ကို split ထုတ်ပြီး ပြန်ရှာလို့ရပါတယ်
+
+Ref: https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie
+
+Note: ကျနော်တို့က Cookie တွေကို ကိုယ့်သဘောနဲ့ကိုယ် သိမ်းချင်တိုင်း သိမ်းလို့မရပါဘူး user ကို request လုပ်ရပါမယ် နောက်ပိုင်း website တွေမှာ Cookie Policy ဆိုတာရှိတယ် User ကိုရှင်းပြပြီးတော့ allow လုပ်မှာလား ဆိုတာမျိုးမေးရတာတွေရှိတယ်
+
+
+ပုံလေးတွေ တွဲပေးထားပါတယ် 
+
+🍀🍀🍀🍀
+

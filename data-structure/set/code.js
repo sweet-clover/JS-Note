@@ -75,23 +75,62 @@ class Set{
 
         return differenceSet;
     }
+
+    subset(otherSet){
+        if(this.size() > otherSet.size()){
+            return false
+        }else{
+            let values = this.values();
+            for(let i = 0; i < values.length; i++){
+                if(!otherSet.has(values[i])){
+                    return false
+                }
+            }
+            return true
+        }
+    }
+
+}
+
+function intersection(setA, setB){
+    let newSet = new Set()
+    for(let x of setA.values()){
+        if(setB.has(x)){
+            newSet.add(x)
+        }
+    }
+    return newSet
+}
+
+function difference(setA, setB){
+    let newSet = new Set()
+    for(let x of setA.values()){
+        if(!setB.has(x)){
+            newSet.add(x)
+        }
+    }
+    return newSet
 }
 
 let setA = new Set();
 setA.add(1);
 setA.add(2);
-setA.add(3);
+setA.add(6);
 let setB = new Set();
+setB.add(1);
+setB.add(2);
 setB.add(3);
 setB.add(4);
-setB.add(5);
-setB.add(6);
-console.log(setA.values())
-let unionAB = setA.union(setB);
-console.log(unionAB.values());
 
-let intersectionAB = setA.intersection(setB);
-console.log(intersectionAB.values());
+let intersectionAB = difference(setA, setB);
+console.log("intersectionAB", intersectionAB)
+// console.log(setA.subset(setB))
+// console.log(setA.values())
+// let unionAB = setA.union(setB);
+// console.log(unionAB.values());
 
-let differenceAB = setA.difference(setB);
-console.log(differenceAB.values());
+// let intersectionAB = setA.intersection(setB);
+// console.log(intersectionAB.values());
+
+// let differenceAB = setA.difference(setB);
+// console.log(differenceAB.values());
