@@ -1,0 +1,70 @@
+JavaScript ( Asynchronous )
+
+
+Asynchronous ဆိုတာ ရှင်းဖို့ Synchronous က စရမယ်
+
+Synchronous ဆိုတာ tasks happen in order အစဉ်လိုက်လုပ်တာ
+
+Example အနေနဲ့ဆိုရင် 
+စာမေးပွဲမှာဆိုရင် ဆရာမတစ်ယောက်တည်းက မေးခွန်းစာရွက် ဝေရင် ရှေ့ခုံက နေပြီးတော့ နောက်ဆုံးခုံထိ
+ကို အစဉ်လိုက် ဝေသွားတာ နဲ့ဆင်တယ်
+
+//synchronous javascript
+
+console.log("Role 1")
+console.log("Role 2")
+console.log("Role 3")
+
+Role 1, Role 2, Role 3 ဆိုပြီးအစဉ်လိုက်ပဲထွက်တာလာမျိုးပေါ့
+
+Synchronous ကို blocking architecture လို့ခေါ်တယ် ရှေ့က မပြီးမချင်းနောက်က
+ဆက်လုပ်လို့မရအောင် block လုပ်ထားလို့
+
+.........................
+
+Asynchronous ကို ထပ်ကြည့်မယ်
+
+Asynchronous ဆိုတာ tasks can run simultaneously (အပြိုင်လုပ်နိုင်တာမျိုး)
+
+Example အနေနဲ့ဆိုရင် 
+စာမေးပွဲဖြေတယ်ဆိုရင် Role 1 ပြီးမှ Role 2 ဖြေရတာမျိုး မဟုတ်ဘူးလေ
+ကျောင်းသားတွေအကုန် ပြိုင်ဖြေ ကြတာ
+
+Role 1 က အရင်ပြီးမယ် ပြီးရင် Role 2 ကလာမယ်
+ဆိုပြီး သတ်မှတ်ထားတာမျိုးမရှိဘူး အရင်ပြီးတဲ့သူ စာရွက် အပ်ပြီးထွက်
+နောက်ဆုံးကျောင်းသားလည်း အရင်ဆုံးအပ်ပြီးထွက်လို့ရတာပဲ (စာမှ မကျက်တာ :P)
+
+ကျောင်းသားတစ်ယောက်နဲ့တစ်ယောက် ကြာတဲ့အချိန် မတူဘူးဆိုတော့
+function တစ်ခုရေးထားမယ် အဲ့မှာ time ကို random ထုတ်ပေးမယ်
+အောက်က ရေးထားထာလေး ဖတ်ကြည့် 
+Math.random() က random number ထုတ်ပေးတားတာ
+Number ကို ကြီးချင်လို့ 1000 နဲ့ မြှောက်ထားတယ် 
+
+//asynchronous javascript
+
+function takeExam(role) {
+    let time = Math.floor(Math.random() * 100);
+    console.log("time", time)
+    setTimeout(function() {
+        console.log(role + ' done!');
+    }, time);
+}
+
+Math.random()
+takeExam("Role 1")
+takeExam("Role 2")
+takeExam("Role 3")
+
+ဒီ Code မှာဆိုရင် Role 3 က အရင် ပြီးချင်ပြီးမယ်
+Role 1 လည်းဖြစ်နိုင်တယ်
+
+Role 1 ပြီးမှ Role 2 ထွက်လာတာမျိုး မဟုတ်ဘူး
+အရင် ပြီးတဲ့သူ အရင်လာနေတာ block မဖြစ်နေဘူး
+
+အဲ့တာကြောင့် Asynchronous ကို non-blocking architecture လို့ခေါ်တယ်
+
+.........................
+
+
+🍀🍀🍀🍀
+

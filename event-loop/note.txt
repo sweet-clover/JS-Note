@@ -1,0 +1,31 @@
+(စဉ်းစားရမှာက tasks  တွေက ဘယ်နေရာမှာ ဆက်လုပ်နေတာလဲ သူက ပြီးရင် ဘယ်လိုသိလဲ)
+ဒီဘက်မှာ ပြန်လာရင် ဒီဘက်က လုပ်တာနဲ့ တိုက်နေရင် ဘယ်လိုလုပ်မလဲ
+အဲ့ဒါတွေ နားလည်ဖို့ဆိုရင် Event Loop, Call Stack, Callback Queue အဲ့ဒါတွေလိုပါတယ်
+Callback ရေးတုန်းက ပြောခဲ့တယ်
+
+Call Stack (Stack အလုပ်လုပ်ပုံရေးပြီးပြီ ) LIFO
+Callback Queue (Queue အလုပ်လုပ်ပုံရေးပြီးပြီ) FIFO
+
+Single Thread
+JavaScript က single-threaded language ဖြစ်တယ်
+Single-Threaded ကိုနားလည်ဖို့ဆိုရင် Multi-Threaded နဲ့ယှဉ်ကြည့်ရမယ်
+
+
+Multi-Threaded က Thread တစ်ခုတည်းမဟုတ်ဘူး
+Thread တစ်ခုထက်ပိုတာက တစ်ပြိုက်နက်တည်းနီးပါး
+အလုပ်ပြိုင်တူ လုပ်ရတာကို ပြောချင်တာ
+
+Example အနေနဲ့ဆိုရင် ကျနော်တို့ ဆော့နေတဲ့ Computer Games ကလည်း multithreading
+ပါပဲ Game ဆော့နေရင်းနဲ့ background music ကိုကြားနေရတာမျိုးပေါ့ 
+Thread လေးတွေခွဲပြီး run နေတာ
+
+.........................
+
+Single-Threaded က တစ်ချိန်တည်းမှာ task တစ်ခုပဲလုပ်လို့ရတာပေါ့
+
+Example အနေနဲ့ဆိုရင် laptop/mobile မှာပါတဲ့ simple calculator
+နဲ့ဆင်တယ် သူက input လက်ခံမယ် operation ပြီးရင် output ပြန်ပြမယ်
+ရိုးရိုးလေးပဲ
+
+.........................
+
