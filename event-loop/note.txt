@@ -1,31 +1,119 @@
-(စဉ်းစားရမှာက tasks  တွေက ဘယ်နေရာမှာ ဆက်လုပ်နေတာလဲ သူက ပြီးရင် ဘယ်လိုသိလဲ)
-ဒီဘက်မှာ ပြန်လာရင် ဒီဘက်က လုပ်တာနဲ့ တိုက်နေရင် ဘယ်လိုလုပ်မလဲ
-အဲ့ဒါတွေ နားလည်ဖို့ဆိုရင် Event Loop, Call Stack, Callback Queue အဲ့ဒါတွေလိုပါတယ်
-Callback ရေးတုန်းက ပြောခဲ့တယ်
+JavaScript ( Browser Event Loop )
 
-Call Stack (Stack အလုပ်လုပ်ပုံရေးပြီးပြီ ) LIFO
-Callback Queue (Queue အလုပ်လုပ်ပုံရေးပြီးပြီ) FIFO
+Event Loop ကို ရှင်းဖို့အတွက်က Asynchronous, Execution Context, Callback ကို အရင်နားလည်ရမယ် 
 
-Single Thread
-JavaScript က single-threaded language ဖြစ်တယ်
-Single-Threaded ကိုနားလည်ဖို့ဆိုရင် Multi-Threaded နဲ့ယှဉ်ကြည့်ရမယ်
+Asynchronous 
+https://www.facebook.com/permalink.php?story_fbid=122126504744102747&id=61553082429213
+
+Execution Context
+https://www.facebook.com/permalink.php?story_fbid=122126748758102747&id=61553082429213
+
+Callback
+https://www.facebook.com/permalink.php?story_fbid=122124680258102747&id=61553082429213
+
+Stack
+https://www.facebook.com/permalink.php?story_fbid=122121070406102747&id=61553082429213
+
+Queue
+https://www.facebook.com/permalink.php?story_fbid=122121335102102747&id=61553082429213
+
+.................
+
+Example Code ကို run ပြီးစမ်းကြည့်ကြမယ်
+
+*******************
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Loop</title>
+</head>
+<body>
+    <script>
+        console.log("Hi!");
+
+        setTimeout(function timeout5s() {
+            console.log("Click the button 5s!");
+        }, 5000);
+
+        setTimeout(function timeout4s() {
+            console.log("Click the button 4s!");
+        }, 4000);
+
+        console.log("Welcome to loupe.");
+    </script>
+</body>
+</html>
+
+*******************
+
+Browser မှာ run လိုက်တာနဲ့ ကျနော်တို့ Code က line by line 
+အလုပ်လုပ်သွားမယ် 
+
+console.log("Hi!"); ကို Call Stack ပေါ်တင်မယ်
+Hi ကို ထုတ်ပြတာပဲရှိတာ callback တွေပါမလာဘူး
+အဲ့တာကို console ထုတ်ပြလိုက်မယ် ပြီးရင် pop လုပ်လိုက်မယ်
+နောက်တစ်ကြောင်းဆက်သွားမယ်
+
+နောက်တစ်ကြောင်းက 
+setTimeout(function timeout5s() {
+    console.log("Click the button 5s!");
+}, 5000);
+အဲ့တာ သူ့မှာ callback function ဖြစ်တဲ့ timeout ဆိုတဲ့ function 
+ပါလာတယ် အဲ့တာက 5000 (5s) ကြာမယ်
+
+ကျနော်တို့သိပြီးသား 5s ကို သူက ထိုင်စောင့်မှာမဟုတ်ဘူး 
+အောက်က console.log("Welcome to loupe."); ကို
+ဆက်လုပ်သွားမှာဆိုတာ
+
+ကျ‌နော်တို့ console မှာ
+Hi
+Welcome to loupe.
+ထွက်နေပြီ
+
+အဲ့တော့ timeout ဆိုတဲ့ callback function ကို ဘယ်နေရာမှာသွားထားပြီး
+ဘယ်အချိန်ပြန်ခေါ်လဲဆက်ကြည့်ကြမယ်
 
 
-Multi-Threaded က Thread တစ်ခုတည်းမဟုတ်ဘူး
-Thread တစ်ခုထက်ပိုတာက တစ်ပြိုက်နက်တည်းနီးပါး
-အလုပ်ပြိုင်တူ လုပ်ရတာကို ပြောချင်တာ
+Stack ပေါ်မှာက timeout5s စောင့်ရမယ့်ဟာရှိနေတာမိုလို့ 
+သူ့ကို တခြားနေရာမှာ သွားထားပြီး အလုပ်လုပ်ခိုင်းလိုက်မယ်
+5s ကြာပြီးတော့မှ Call Stack ပေါ်ပြန်တင်ပြီး အလုပ်ပြန်လုပ်မယ်
 
-Example အနေနဲ့ဆိုရင် ကျနော်တို့ ဆော့နေတဲ့ Computer Games ကလည်း multithreading
-ပါပဲ Game ဆော့နေရင်းနဲ့ background music ကိုကြားနေရတာမျိုးပေါ့ 
-Thread လေးတွေခွဲပြီး run နေတာ
+timeout5s က တစ်ခြားတစ်နေရာမှာ သွားလုပ်နေပြီဆိုတော့
+CallStack ပေါ်မှာက ရှင်းနေပြီ 
+အဲ့တော့ Code ဆက်ဖတ်ကြည့်မယ်
 
-.........................
+setTimeout(function timeout4s() {
+    console.log("Click the button 4s!");
+}, 4000);
+နောက်ထပ်က 4s စောင့်ရမယ် timeout4s ကိုလည်း တခြားနေရာပို့လိုက်မယ်
 
-Single-Threaded က တစ်ချိန်တည်းမှာ task တစ်ခုပဲလုပ်လို့ရတာပေါ့
+Code က မကျန်တော့ဘူး အဲ့တာကြောင့်
+timeout5s နဲ့ timeout4s အလုပ်လုပ်နေတဲ့နေရာကိုဆက်ကြည့်မယ်
+သူတို့က Web API container ထဲရောက်သွားပြီး Web APIs ကအလုပ်ဆက်လုပ်တယ်
+Web APIs က asynchronous calls တွေကို handle လုပ်ပေးနိုင်တယ်
+eg, addEventListener, setTimeout, setInterval, AJAX call
+တွေကို handle လုပ်ပေးနိုင်တယ်
+timeout5s နဲ့ timeout4s ကို Web APIs က ဆက်အလုပ်လုပ်နေတယ်မှာ
+4s နဲ့ 5s ဆိုရင် timeout4s က အရင်ပြီးသွားမယ် ပြီးသွားတဲ့ဟာကို
+Callback Queue ထဲ ထည့်ပေးလိုက်တယ် ခနကြာရင်
+timeout5s က ပြီးသွားမယ် Callback Queue ထဲကို 
+ထပ်ထည့်ပေးလိုက်တယ်
 
-Example အနေနဲ့ဆိုရင် laptop/mobile မှာပါတဲ့ simple calculator
-နဲ့ဆင်တယ် သူက input လက်ခံမယ် operation ပြီးရင် output ပြန်ပြမယ်
-ရိုးရိုးလေးပဲ
+Example အနေနဲ့ဆို Callback Queue ထဲမှာ timeout5s, timeout4s
 
-.........................
+ရှိမယ် 4s က အရင်ဆုံးရောက်လို့ အရင် ခေါ်ခံရမယ်
+(ဘာလို့ရှေ့ဆုံးကဟာလဲဆိုရင် Queue ရဲ့အလုပ်လုပ်ပုံက FIFO)
 
+Console မှာ Click the button 4s! ထွက်မယ်
+ပြီးရင် timeout5s က Call Stack ပေါ်ရောက်မယ်
+Console မှာ Click the button 5s! ထွက်မယ်
+
+မြင်သာအောင်စမ်းချင်ရင် 
+http://latentflip.com/loupe/?code=Y29uc29sZS5sb2coIkhpISIpOw0KDQpzZXRUaW1lb3V0KGZ1bmN0aW9uIHRpbWVvdXQ1cygpIHsNCiAgICBjb25zb2xlLmxvZygiQ2xpY2sgdGhlIGJ1dHRvbiA1cyEiKTsNCn0sIDUwMDApOw0KDQpzZXRUaW1lb3V0KGZ1bmN0aW9uIHRpbWVvdXQ0cygpIHsNCiAgICBjb25zb2xlLmxvZygiQ2xpY2sgdGhlIGJ1dHRvbiA0cyEiKTsNCn0sIDQwMDApOw0KDQpjb25zb2xlLmxvZygiV2VsY29tZSB0byBsb3VwZS4iKTs%3D!!!PGJ1dHRvbj5DbGljayBtZSE8L2J1dHRvbj4%3D
+အဲ့ site မှာ စမ်းကြည့်လို့ရတယ် 
+
+
+🍀🍀🍀🍀

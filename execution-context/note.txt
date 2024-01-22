@@ -1,0 +1,125 @@
+JavaScript ( Execution Context )
+
+Execution Context - an environment where the Javascript code is evaluated and executed
+( JavaScript Code တွေ အလုပ်လုပ်မယ့် နေရာလေးလို့ပြောလို့ရတယ် )
+
+JavaScript မှာ Execution Context - 3 မျိုးရှိတယ်
+Global Execution Context 
+Functional Execution Context 
+Eval Function Execution Context 
+
+...........................
+
+Note: Stack က LIFO နဲ့သွားတာ
+Stack
+https://www.facebook.com/permalink.php?story_fbid=122121070406102747&id=61553082429213
+Stack ကို နားလည်အောင်ကြည့်ပြီးမှ ဆက်သွားပါ
+
+...........................
+
+Global Execution Context (GEC)
+
+ကျနော်တို့က JS code ကို run လိုက်တာနဲ့ Global Execution Context
+ကို create ပြီး Call Stack ပေါ်တင်လိုက်တယ်
+
+ကျနော်တို့က html file ထဲမှာ js ကို ရေးပြီးရင် browser မှာ run တယ်
+browser မှာ ရှိတဲ့ window object က Global Execution Context 
+ထဲရောက်သွားမယ်
+
+*******************
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Execution Context</title>
+    <script>
+        var examName = "Coding Test"
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+
+*******************
+examName က var နဲ့ကြေညာထားတာ Global Scope ဖြစ်လို့
+window object ထဲဝင်သွားမယ်
+အဲ့တာလေး run ကြည့်ရင် Call Stack ထဲမှာ Global Execution Context 
+စရောက်သွားမယ်
+
+........................
+.    Stack     .
+........................
+.                  .
+.                  .
+.    GEC       .
+........................
+
+
+...........................
+
+Functional Execution Context (FEC)
+
+Code ထဲမှာ ရှိတဲ့ Function ကို ခေါ်လိုက်ရင် Functional Execution Context
+ကို create လုပ်ပြီး Call Stack ပေါ်ထပ်တင်လိုက်တယ်
+
+*******************
+<script>
+    var examName = "Coding Test"
+    function takeExam(){
+        console.log("Start: ")
+    }
+    takeExam()
+</script>
+*******************
+
+function တစ်ခုတစ်ခုရေးလိုက်တယ် အဲ့တာက Call Stack ထဲ ထပ်ဝင်သွားမယ်
+သူက function မိုလို့ Functional Execution Context မှာအလုပ်လုပ်မယ်
+
+
+.............................
+.    Stack         .
+.............................
+.                      .
+.  takeExam()  .
+.    GEC           .
+.............................
+
+Stack က အဲ့လိုဖြစ်သွားမယ် ပုံမှာ ကြည့်လို့ရတယ် 
+Developer Tool အောက်က Source ထဲမှာ Call Stack အလုပ်လုပ်ပုံကို
+breakpoint ထောက်ပြီးကြည့်လို့ရတယ်
+
+ပုံမှာ မျှားလေးပြထားတာရှိတယ် အဲ့တာကို ဆက်နှိပ်သွားရင်
+အရင်ဆုံး takeExam ကို pop လုပ်လိုက်တယ်
+ပြီးရင် GEC(anonymous) ကို pop လုပ်လိုက်တာတွေ့ရမယ်
+
+Stack သဘောတရားကြောင့်ပါ သူက LIFO
+
+...........................
+
+Eval Function Execution Context 
+
+eval Function က string ကို value ပြောင်းပေးနိုင်တယ်
+string ကြားထဲမှာပါတဲ့ arithmetic operation တွေကို သူတွက်ချက်ပေးနိုင်တယ်
+eval('2 + 2') => 4
+
+let str = '2*2'
+console.log("str", str) //'2*2'
+console.log("eval", eval(str)) //4
+
+Note: Never use eval()! security risk ကြောင့်မသုံးသင့်ပါဘူး 
+သုံးမိမှာစိုးလို့ ပြောပြထားတာပါ 
+
+Ref: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval
+
+Eval Function အတွက် အလုပ်လုပ်တဲ့ နေရာ တစ်ခုရှိတယ်
+
+...........................
+
+
+ရှုတ်နေမယ်လို့ထင်ပါတယ် browser မှာ run ပြီး trace 
+လိုက်ကြည့်ရင် ကြည့်ရတာပိုရှင်းပါလိမ့်မယ်
+
+🍀🍀🍀🍀

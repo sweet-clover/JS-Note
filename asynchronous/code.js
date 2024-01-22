@@ -14,7 +14,6 @@ function takeExam(role) {
     }, time);
 }
 
-Math.random()
 takeExam("Role 1")
 takeExam("Role 2")
 takeExam("Role 3")
