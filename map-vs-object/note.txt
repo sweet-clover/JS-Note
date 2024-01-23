@@ -1,5 +1,117 @@
 JavaScript ( Object vs Map )
 
+JS မှာ Object ကို Object Literals ကို သုံးပြီး create လုပ်လို့ရတယ်
+
+Eg. 
+let student = { id: 1, age: 25, name: "Aung Aung" }
+အဲ့လိုရေးတယ်
+
+GET
+name ကို လိုချင်ရင် student.name 
+
+INSERT
+value ထပ်ထည့်မယ်ဆိုရင် student.gender = "Male"
+
+UPDATE 
+student.name = "Maung Maung" (overwrite လုပ်လိုက်တာ)
+
+DELETE
+delete student.gender
+
+ဆိုပြီးသုံးတယ်
+
+Object ကို loop ပတ်ကြည့်ရအောင် (for...in) သုံးလို့ရတယ်
+
+for(key in student){
+    console.log("key => ", key, ", value => ", student[key])
+}
+
+.....................
+
+JavaScript မှာ Map Object ဆိုတာရှိတယ်
+သူ့က [key, value] pairs တွေကို သိမ်းတာ
+key, value နှစ်ခုလုံးက Any value (both objects and primitive values)
+ထည့်လို့ရတယ်
+
+const map1 = new Map();
+
+map1.set('a', 1);
+map1.set('b', 2);
+map1.set('c', 3);
+
+const studentMap = new Map();
+
+studentMap.set('id', 1);
+studentMap.set('age', 25);
+studentMap.set('name', "Aung Aung");
+
+console.log(studentMap)
+//Map(3) { 'id' => 1, 'age' => 25, 'name' => 'Aung Aung' }
+PHP လေ့လာဖူးတဲ့သူတွေသိလိမ်မ့ယ် Map က Associative array 
+နဲ့ဆင်တယ်
+$car = array("brand"=>"Ford", "model"=>"Mustang", "year"=>1964);
+
+GET 
+name ကို လိုချင်ရင် get method ကိုသုံးတယ်
+studentMap.get("name")
+
+INSERT (set method)
+value ထပ်ထည့်မယ်ဆိုရင် studentMap.set("gender", "Male");
+
+
+UPDATE (set method)
+studentMap.set('name', "Maung Maung");
+(overwrite လုပ်လိုက်တာ)
+
+DELETE (delete method)
+studentMap.delete("gender");
+
+ရှိမရှိစစ်ချင်ရင် has method သုံးလို့ရတယ်
+// studentMap.has("name"); // true
+ဆိုပြီးသုံးတယ်
+
+Map ကို loop ပတ်ကြည့်ရအောင် (for...of / forEach) သုံးလို့ရတယ်
+
+for (const [key, value] of studentMap) {
+    console.log("key => ", key, ", value => ", value)
+}
+
+.....................
+
+Map နဲ့ Obj ရေးတာလေး နည်းနည်းပဲကွာနေတာ 
+Map ကို သုံးတာနဲ့ Obj ကိုသုံးတာနဲ့က တူတူပဲ
+ဘယ်နေရမှာ ကွာခြားလဲဆက်ကြည့်မယ်
+
+Map က key မှာ any value ထည့်လို့ရတယ်
+studentMap.set({task: "testing"}, "Maung Maung");
+ဒါဆို Object ကို key အနေနဲ့ထည့်လိုက်တာ 
+Object Literal မှာဆိုရင် String or a Symbol ဘဲလက်ခံတာ 
+error တက်မယ် မရဘူး
+
+Maps are natively iterable. (iterable ဆိုတာ loop ပတ်လို့ရတာ)
+for...of / forEach ကိုသုံးပြီး loop ပတ်လို့ရတယ်
+Objects are not iterable. သို့သော်လည်း (for...in/ Object.Entries()) 
+တွေသုံးပြီး loop ပတ်လို့ရတယ် သုံးလို့ရတယ်
+
+Map က Array ပြောင်းလို့ရတယ် Array.from(studentMap)
+Object က မရဘူး Array.from(student) //[]
+
+Object ကို string ပြောင်းချင်တယ်ဆိုရင် Map နဲ့မရဘူး Object မှာအဆင်ပြေတယ်
+JSON.stringify(student)
+JSON.stringify(studentMap) //{}
+
+
+May မှာ ဘယ်နှစ်ခုရှိလဲသိချင်ရင် studentMap.size
+ဆိုပြီးသုံးရင်ရတယ် Object မှာဆိုရင် Object.keys(student).length
+
+ဘယ်အချိန်မှာ Map ကို သုံးသင့်လဲဆိုရင် Object မှာ key က complex ဖြစ်တာမျိုး ဆိုရင် သုံးလို့ရတယ်
+Object ကို String ပြောင်မယ်ဆိုရင် Map က အဆင်မပြေဘူး
+
+Note: Map, Associative Array, Symbol, or Lookup table အဲ့တာတွေက 
+Dictionary Data Structure နဲ့တူတူပဲ
+Performance ကို Data Structure ပိုင်းမှာဆက်ကြည့်မယ်
+ဘယ်နေရာတွေမှာ Map က Performance ပိုမြန်ပြီး ဘယ်နေရာတွေမှာ Performance ထိလဲဆိုတာ
+
+Ref: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
 
 🍀🍀🍀🍀
-
