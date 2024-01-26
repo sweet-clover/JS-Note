@@ -1,0 +1,22 @@
+JavaScript ( How to check if a value exists in an object )
+
+Object ထဲမှာ key ရှိမရှိစစ်ကြည့်ကြမယ်
+
+........................
+
+in operator
+
+သူက boolean return ပြန်တယ် Object ထဲမှာ key ရှိလား စစ်လို့ရတယ်
+
+const car = { make: 'Honda', model: 'Accord', year: 1998 };
+console.log('make' in car); //true 
+(make ဆိုတဲ့ key က car object ထဲမှာရှိတယ်)
+console.log('type' in car); //false
+(type ဆိုတဲ့ key က car object ထဲမှာမရှိဘူး)
+
+........................
+
+hasOwnProperty
+
+car.hasOwnProperty('make') //true
+car.hasOwnProperty('type') //false

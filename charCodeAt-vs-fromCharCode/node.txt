@@ -1,0 +1,43 @@
+JavaScript ( charCodeAt vs String.fromCharCode)
+
+charCodeAt ဆိုတာ integer return ပြန်တာ (between 0 and 65535 )
+အဲ့ number က UTF-16 (16-bit Unicode Transformation Format ) ရဲ့ 
+code unit index
+
+let text = "Clover" ဆိုရင်
+text.charCodeAt(0) => 67
+text.charCodeAt(1) => 108
+text.charCodeAt(2) => 111
+text.charCodeAt(3) => 118
+text.charCodeAt(4) => 101
+text.charCodeAt(5) => 114
+
+
+String ကို index ပြောင်းတာ သိပြီဆိုရင် index ကို String ပြောင်းတာ
+ထပ်ကြည့်မယ်
+
+String.fromCharCode() ကို သုံးတယ်
+
+String.fromCharCode(67) => "C"
+String.fromCharCode(108) => "l"
+String.fromCharCode(111) => "o"
+String.fromCharCode(118) => "v"
+String.fromCharCode(101) => "e"
+String.fromCharCode(114) => "r"
+
+
+String.fromCharCode(67, 108, 111, 118, 101, 114); //"Clover"
+
+ပုံတွဲထားပေးတယ် ASCII Table ကို ကျောင်းမှာသင်ခဲ့ရမယ်ထင်ပါတယ်
+ASCII (American Standard Code for Information Interchange) 
+
+Computer က 0 နဲ့ 1 ပဲနားလည်တာ 
+67 ကို binary ထပ်ပြောင်းရင် 1000011 အဲ့လိုထပ်ရတယ်
+
+
+နားလည်သွားရင် Codewars မှာ အဲ့တာလေးဖြေကြည့်ပေါ့ 
+https://www.codewars.com/kata/57f75cc397d62fc93d000059/train/javascript
+
+
+🍀🍀🍀🍀
+
