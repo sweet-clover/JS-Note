@@ -1,0 +1,13 @@
+React - ( Redux )
+
+Why is it called Redux? Because it combines the two words Reducer and Flux.
+
+
+Redux is a predictable state container for JavaScript apps.
+
+
+store holds the whole state tree of your application. 
+
+🍀🍀🍀🍀
+
+

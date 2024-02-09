@@ -1,0 +1,35 @@
+JavaScript (WeakMap and WeakSet)
+
+
+WeakMap
+
+Map အကြောင်းအရင်ဖတ်ကြည့်ရမယ်
+JavaScript ( Object vs Map )
+https://www.facebook.com/permalink.php?story_fbid=122127110000102747&id=61553082429213
+
+A WeakMap is a collection of key-value pairs where the keys must be objects 
+and the values can be any arbitrary value.
+
+WeakMap ဆိုတာက object လိုပဲ key, value အတွဲလိုက်သိမ်းတာပဲ
+Map နဲ့ ဘာကွာလဲဆိုရင် 
+
+Map က Garbage collection မလုပ်ပေးဘူး
+WeakMap က Garbage collection လုပ်ပေးတယ်
+
+ကျနော်တို့က code ‌ရေးရင် primitive data types, object, functions တွေ
+create လုပ်ပြီးရေးယ် အဲ့တာတွေက Memory အပေါ်မှာရှိနေတယ် 
+အဲ့တာတွေက အသုံးမလို တော့တာတွေရှိနိုင်တယ် ဒါပေမယ့်
+memory ပေါ်မှာ ကျန်နေခဲ့တယ် အဲ့တာတွေကို auto remove လုပ်ပေးတာကို 
+Garbage collection လို့ခေါ်တယ်
+
+Garbage collection ဆိုတာ Memory ပေါ်မှာ ရှိနေတဲ့ အသုံးမလိုတဲ့ အရာတွေကို
+auto ဖျက်ပေးတာဆိုပြီး အလွယ်မှတ်လို့ရတယ်
+
+
+
+..............................
+
+WeakSet
+A WeakSet is a collection of unique objects
+
+🍀🍀🍀🍀
